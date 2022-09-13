@@ -1,5 +1,5 @@
 #!/bin/sh
-INSTALL_DIR="${INSTALL_DIR:-$PWD}"
+INSTALL_DIR="${INSTALL_DIR:-$PWD/dotfiles}"
 
 if [ -d "$INSTALL_DIR" ]; then
     echo "Updating dotfiles..."
