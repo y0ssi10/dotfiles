@@ -1,0 +1,12 @@
+command_timeout	= 1200
+
+[character]
+error_symbol = "[❯](bold #ff0000)"
+
+[aws]
+format = 'on [$symbol($profile )(\[$duration\])]($style)'
+
+[custom.git_email]
+command = "git config user.email | awk -F '[@]' '{print $2}'"
+when = """ git status """
+format = "📨 [$output]($style) "

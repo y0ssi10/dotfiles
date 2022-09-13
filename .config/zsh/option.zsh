@@ -1,0 +1,22 @@
+# Options
+
+setopt extended_history
+setopt append_history
+setopt hist_fcntl_lock
+setopt hist_find_no_dups
+setopt hist_ignore_all_dups
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_no_functions
+setopt hist_no_store
+setopt hist_reduce_blanks
+setopt hist_save_no_dups
+unsetopt hist_verify
+setopt list_packed
+setopt auto_menu
+setopt auto_correct
+setopt correct
+setopt auto_cd
+setopt no_beep
+setopt rm_star_wait
+setopt nolistambiguous
