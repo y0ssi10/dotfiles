@@ -1,0 +1,23 @@
+# Bundle
+.bundle/
+
+# macOS
+.DS_Store
+._*
+
+# Node.js
+node_modules/
+
+# Vim
+.*.swp
+
+# Code
+.vscode/*
+
+### Memo ###
+_MEMO*
+_memo*
+_TODO*
+_todo*
+_TEST*
+_test*

@@ -1,2 +1,4 @@
-nodejs 14.18.2
+nodejs 16.15.1
 python 3.10.1
+awscli 2.9.5
+poetry 1.2.2

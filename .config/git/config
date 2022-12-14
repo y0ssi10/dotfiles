@@ -1,0 +1,52 @@
+# ref: https://git-scm.com/docs/git-config
+
+[advice]
+  addEmptyPathspec = false
+
+[commit]
+  verbose = true
+  gpgSign = false
+
+[core]
+  autocrlf = false
+  ignoreCase = false
+
+[diff]
+  algorithm = histogram
+
+[fetch]
+  prune = true
+
+[gpg]
+  program = gpg
+
+[init]
+  defaultBranch = main
+
+[merge]
+  ff = false
+  conflictStyle = diff3
+
+[pull]
+  ff = only
+
+[push]
+  default = simple
+  followTags = true
+
+[rebase]
+  autostash = true
+  autosquash = true
+
+[status]
+  showUntrackedFiles = all
+
+[tag]
+  forceSignAnnotated = false
+
+[user]
+  useConfigOnly = true
+
+### ghq ###
+[ghq]
+  root = ~/workspace

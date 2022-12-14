@@ -1,10 +1,50 @@
 command_timeout	= 1200
-
-[character]
-error_symbol = "[❯](bold #ff0000)"
+scan_timeout = 10
 
 [aws]
-format = 'on [$symbol($profile )(\[$duration\])]($style)'
+format = 'on [$symbol($profile )(\($region\) )]($style)'
+style = "bold blue"
+symbol = "🅰 "
+
+[aws.region_aliases]
+ap-northeast-1 = "jp"
+
+[battery]
+full_symbol = "🔋 "
+charging_symbol = "⚡️ "
+discharging_symbol = "💀 "
+
+[character]
+success_symbol = "[➜](bold green) "
+error_symbol = "[✗](bold red) "
+
+[directory]
+truncation_length = 100
+truncate_to_repo = false
+truncation_symbol = "…/"
+
+[docker_context]
+format = "via [🐋 $context](blue bold)"
+
+[git_branch]
+symbol = "🌱 "
+
+[git_commit]
+commit_hash_length = 4
+tag_symbol = "🔖 "
+
+[username]
+style_user = "white bold"
+style_root = "black bold"
+format = "[$user🌱]($style) "
+disabled = false
+show_always = true
+
+[custom.arch]
+command = "uname -m"
+when = """ test $(uname -m) = "x86_64" """
+style = "bold yellow"
+format = "[$output]($style)"
 
 [custom.git_email]
 command = "git config user.email | awk -F '[@]' '{print $2}'"

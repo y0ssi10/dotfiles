@@ -6,18 +6,31 @@ source "$(dirname "$0")/common.bash"
 
 touch "$HOME/.hushlogin"
 
+# GPG
+ln -sfv "$REPO_DIR/.config/gnupg/gpg-agent.conf" "$HOME/.gnupg/gpg-agent.conf"
+
 # Finder
+defaults write com.apple.finder DisableAllAnimations -bool true
 defaults write com.apple.finder AppleShowAllFiles -bool true
 defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder ShowTabView -bool true
 defaults write com.apple.finder NewWindowTarget -string PfHm
+defaults write com.apple.finder AnimateInfoPanes -bool false
+defaults write -g NSScrollViewRubberbanding -bool false
 
 # Keyboard
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+defaults write -g AppleKeyboardUIMode -int 3
+defaults write -g InitialKeyRepeat -int 10
+defaults write -g KeyRepeat -int 1
+
+# Trackpad
+defaults write -g AppleEnableSwipeNavigateWithScrolls -boolean true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 0
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 0
 
 # Dock
 defaults write com.apple.dock orientation right
-defaults write com.apple.dock autohide -bool false
+defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock tilesize -int 50
 defaults write com.apple.dock magnification -bool false
 defaults write com.apple.dock show-recents -bool false
