@@ -1,0 +1,104 @@
+shell = "zsh"
+
+apply = ["defer"]
+
+[templates]
+defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.post | nl }}"
+
+[plugins]
+
+####################
+# sync
+####################
+
+[plugins.zsh-defer]
+github = 'romkatv/zsh-defer'
+apply = ["source"]
+profiles = ["sync"]
+
+[plugins.dotfiles-lazy]
+local = "~/.config/zsh"
+use = ["lazy.zsh"]
+profiles = ["sync"]
+
+[plugins.starship]
+inline = '''
+eval "$(starship init zsh)"
+export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
+'''
+profiles = ["sync"]
+
+####################
+# defer
+####################
+
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
+dir = "src"
+apply = ["fpath"]
+profiles = ["defer"]
+
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+use = ["{{ name }}.zsh"]
+profiles = ["defer"]
+
+[plugins.zsh-history-substring-search]
+github = "zsh-users/zsh-history-substring-search"
+hooks.post = """
+bindkey "${terminfo[kcuu1]}" history-substring-search-up   # arrow-up
+bindkey "${terminfo[kcud1]}" history-substring-search-down # arrow-down
+bindkey "^[[A" history-substring-search-up   # arrow-up
+bindkey "^[[B" history-substring-search-down # arrow-down
+"""
+profiles = ["defer"]
+
+[plugins.fast-syntax-highlighting]
+github = "zdharma-continuum/fast-syntax-highlighting"
+profiles = ["defer"]
+
+[plugins.zsh-replace-multiple-dots]
+github = "momo-lab/zsh-replace-multiple-dots"
+hooks.post = """
+replace_multiple_dots_exclude_go() {
+    if [[ "$LBUFFER" =~ '^go ' ]]; then
+        zle self-insert
+    else
+        zle .replace_multiple_dots
+    fi
+}
+zle -N .replace_multiple_dots replace_multiple_dots
+zle -N replace_multiple_dots replace_multiple_dots_exclude_go
+"""
+apply = ['defer']
+profiles = ["defer"]
+
+[plugins.mise-completion]
+github = "jdx/mise"
+apply = ["fpath"]
+dir = "completions"
+
+[plugins.direnv]
+inline = 'eval "$(direnv hook zsh)"'
+# apply = ['defer']
+profiles = ["defer"]
+
+[plugins.zsh-autopair]
+github = "hlissner/zsh-autopair"
+apply = ['defer']
+profiles = ["defer"]
+
+# programs
+[plugins.forgit]
+github = "wfxr/forgit"
+dir = "bin"
+apply = ["path"]
+profiles = ["defer"]
+
+# local
+[plugins.compinit]
+inline = """
+autoload -Uz compinit
+zsh-defer -a -t0.01 compinit -d "$XDG_STATE_HOME/zcompdump"
+"""
+profiles = ["defer"]

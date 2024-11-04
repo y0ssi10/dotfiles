@@ -50,3 +50,7 @@
 ### ghq ###
 [ghq]
   root = ~/workspace
+
+### GitHub ###
+[url "git@github.com:"]
+  pushInsteadOf = "https://github.com"

@@ -4,6 +4,7 @@ source "$(dirname "$0")/common.bash"
 
 [ "$(uname)" != "Darwin" ] && exit
 
+# Turn off the login banner
 touch "$HOME/.hushlogin"
 
 # GPG
@@ -37,7 +38,7 @@ defaults write com.apple.dock show-recents -bool false
 
 # Menubar
 defaults write com.apple.menuextra.battery ShowPercent -bool true
-defaults write com.apple.menuextra.clock DateFormat -string "MMM d  H:mm:ss"
+defaults write com.apple.menuextra.clock DateFormat -string "M\u6708d\u65e5(EEE)  H:mm:ss"
 
 # Mission Control
 defaults write com.apple.dock wvous-br-corner -int 4 # Bottom right -> Desktop

@@ -1,2 +1,0 @@
-cache=${NPM_CACHE_DIR}/cache
-store-dir=${PNPM_DATA_DIR}/pnpm-store

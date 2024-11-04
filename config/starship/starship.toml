@@ -14,6 +14,10 @@ full_symbol = "🔋 "
 charging_symbol = "⚡️ "
 discharging_symbol = "💀 "
 
+[[battery.display]]
+threshold = 20
+style = "bold red"
+
 [character]
 success_symbol = "[➜](bold green) "
 error_symbol = "[✗](bold red) "
@@ -27,10 +31,13 @@ truncation_symbol = "…/"
 format = "via [🐋 $context](blue bold)"
 
 [git_branch]
+format = "on [$symbol$branch]($style) "
 symbol = "🌱 "
+style = "bold yellow"
 
 [git_commit]
 commit_hash_length = 4
+style = "bold white"
 tag_symbol = "🔖 "
 
 [username]
@@ -39,6 +46,9 @@ style_root = "black bold"
 format = "[$user🌱]($style) "
 disabled = false
 show_always = true
+
+[memory_usage]
+format = "[$symbol$ram]($style) "
 
 [custom.arch]
 command = "uname -m"
