@@ -5,6 +5,8 @@ brew "bash"
 brew "openssl@3"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# GNU internationalization (i18n) and localization (l10n) library
+brew "gettext"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Get a file from an HTTP, HTTPS or FTP server
@@ -27,8 +29,6 @@ brew "fd"
 brew "findutils"
 # Command-line fuzzy finder written in Go
 brew "fzf"
-# GNU internationalization (i18n) and localization (l10n) library
-brew "gettext"
 # GNU awk utility
 brew "gawk"
 # GitHub command-line tool
@@ -51,8 +51,12 @@ brew "gnupg"
 brew "grep"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Kubernetes CLI To Manage Your Clusters In Style!
+brew "k9s"
 # Easy way to access the system keyring service from python
 brew "keyring"
+# Run local Kubernetes cluster in Docker
+brew "kind"
 # Simple terminal UI for git commands
 brew "lazygit"
 # Polyglot runtime manager (asdf rust clone)
@@ -61,14 +65,10 @@ brew "mise"
 brew "navi"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
-# Image manipulation
-brew "netpbm"
 # Network Kanji code conversion Filter (NKF)
 brew "nkf"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
-# Cloud native development platform
-brew "pulumi"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Fast, configurable, shell plugin manager
@@ -79,8 +79,6 @@ brew "shellcheck"
 brew "starship"
 # Terminal multiplexer
 brew "tmux"
-# CLI tool that moves files or folder to the trash
-brew "trash"
 # Vi 'workalike' with many additional features
 brew "vim"
 # Tool for creating isolated virtual python environments
@@ -99,8 +97,8 @@ cask "arc"
 cask "battery"
 # Tool to customise input devices and automate computer systems
 cask "bettertouchtool"
-# OpenAI's official ChatGPT desktop app
-cask "chatgpt"
+# Write, edit, and chat about your code with AI
+cask "cursor"
 cask "font-udev-gothic-nf"
 # Web browser
 cask "google-chrome"
@@ -116,7 +114,5 @@ cask "orbstack"
 cask "postman"
 # Control your tools with a few keystrokes
 cask "raycast"
-# Plugin for AWS CLI to start and end sessions that connect to managed instances
-cask "session-manager-plugin"
 # Open-source code editor
 cask "visual-studio-code"
