@@ -40,6 +40,11 @@ commit_hash_length = 4
 style = "bold white"
 tag_symbol = "🔖 "
 
+[kubernetes]
+disabled = false
+format = 'on [⛵ $context\\($namespace\\)](cyan bold) in '
+style = "bold green"
+
 [username]
 style_user = "white bold"
 style_root = "black bold"
