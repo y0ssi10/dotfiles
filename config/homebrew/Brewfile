@@ -89,8 +89,6 @@ brew "yq"
 brew "zsh"
 # GPU-accelerated terminal emulator
 cask "alacritty"
-# Cloud native persistent desktop virtualization
-cask "amazon-workspaces"
 # Chromium based browser
 cask "arc"
 # App for managing battery charging. (Also installs a CLI on first use.)
