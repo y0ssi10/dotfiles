@@ -22,6 +22,6 @@ echo "Updating Homebrew..."
 brew update
 
 echo "Installing some apps..."
-brew bundle install --file "${REPO_DIR}/.config/homebrew/Brewfile" --verbose
+brew bundle install --file "${REPO_DIR}/config/homebrew/Brewfile" --verbose
 
 true
