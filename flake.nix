@@ -75,7 +75,7 @@
               echo "Updating flake..."
               nix flake update
               echo "Updating nix-darwin..."
-              nix run nix-darwin -- switch --flake .#kawarimidoll-darwin
+              nix run nix-darwin -- switch --flake .#y0ssi10-darwin
               echo "Update complete!"
             ''
           );
