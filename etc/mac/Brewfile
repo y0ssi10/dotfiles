@@ -1,10 +1,7 @@
-tap "homebrew/bundle"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@3"
-# Clone of cat(1) with syntax highlighting and Git integration
-brew "bat"
 # GNU internationalization (i18n) and localization (l10n) library
 brew "gettext"
 # GNU File, Shell, and Text utilities
@@ -20,8 +17,6 @@ brew "docker-completion"
 # Pack, ship and run any application as a lightweight container
 brew "docker"
 # Modern, maintained replacement for ls
-brew "eza"
-# Like neofetch, but much faster because written mostly in C
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
@@ -32,8 +27,6 @@ brew "fzf"
 # GNU awk utility
 brew "gawk"
 # GitHub command-line tool
-brew "gh"
-# Remote repository management made easy
 brew "ghq"
 # Upload multiple artifacts to GitHub Release in parallel
 brew "ghr"
@@ -102,10 +95,6 @@ cask "font-udev-gothic-nf"
 cask "google-chrome"
 # Japanese input software
 cask "google-japanese-ime"
-# Keymap tool for Happy Hacking Keyboard Professional (Hybrid models only)
-cask "hhkb-keymap-tool"
-# Software for Logitech devices
-cask "logi-options+"
 # Replacement for Docker Desktop
 cask "orbstack"
 # Collaboration platform for API development
