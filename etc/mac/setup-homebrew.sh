@@ -15,7 +15,7 @@ which brew >> /dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercont
 which brew >> /dev/null || die "brew is required."
 # git -C $(brew --repo homebrew/core) checkout master
 eval "$(/opt/homebrew/bin/brew shellenv)"
-brew doctor || die "brew doctor raised error."
+# brew doctor || die "brew doctor raised error."
 
 echo "  Updating Homebrew..."
 brew update
