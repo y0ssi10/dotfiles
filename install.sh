@@ -83,12 +83,12 @@ link_dotfiles() {
   if cd "$DOT_DIR"; then
     for f in $(find . -not -path '*.git*' -not -path '*node_modules*' -not -path '*.DS_Store' -path '*/.*' -type f -print | cut -b3-)
     do
-      mkdir -p "$XDG_CONFIG_HOME/$(dirname "$f")"
+      mkdir -p "$HOME/$(dirname "$f")"
       die_if_error "create directory $f"
-      if [ -L "$XDG_CONFIG_HOME/$f" ]; then
-        ln -sfv "$DOT_DIR/$f" "$XDG_CONFIG_HOME/$f"
+      if [ -L "$HOME/$f" ]; then
+        ln -sfv "$DOT_DIR/$f" "$HOME/$f"
       else
-        ln -sniv "$DOT_DIR/$f" "$XDG_CONFIG_HOME/$f"
+        ln -sniv "$DOT_DIR/$f" "$HOME/$f"
       fi
       die_if_error "create symlink for $f"
     done
