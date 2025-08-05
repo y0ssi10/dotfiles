@@ -3,10 +3,11 @@
   lib,
   config,
   pkgs,
+  username,
   ...
 }:
 let
-  username = "y0ssi10";
+  inherit username;
 in
 {
   nixpkgs = {

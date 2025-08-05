@@ -40,7 +40,7 @@
     }@inputs:
     let
       system = "aarch64-darwin";
-      username = "y0ssi10";
+      defaultUsername = "y0ssi10";
       pkgs = import nixpkgs { inherit system; };
     in
     {
@@ -50,10 +50,14 @@
           program = toString (
             pkgs.writeShellScript "update-script" ''
               set -e
+
+              USERNAME="''${1:-${defaultUsername}}"
+              echo "Using username: $USERNAME"
+
               echo "Updating flake..."
               nix flake update
               echo "Updating home-manager..."
-              nix run nixpkgs#home-manager -- switch --flake .#myHomeConfig
+              nix run nixpkgs#home-manager -- switch --flake .#myHomeConfig --arg username "$USERNAME"
               echo "Updating nix-darwin..."
               nix run nix-darwin -- switch --flake .#y0ssi10-darwin
               echo "Update complete!"
@@ -66,10 +70,14 @@
           program = toString (
             pkgs.writeShellScript "update-script" ''
               set -e
+
+              USERNAME="''${1:-${defaultUsername}}"
+              echo "Using username: $USERNAME"
+
               echo "Updating flake..."
               nix flake update
               echo "Updating home-manager..."
-              nix run nixpkgs#home-manager -- switch --flake .#myHomeConfig
+              nix run nixpkgs#home-manager -- switch --flake .#myHomeConfig --arg username "$USERNAME"
               echo "Update complete!"
             ''
           );
@@ -95,10 +103,10 @@
       };
 
       homeConfigurations = {
-        myHomeConfig = home-manager.lib.homeManagerConfiguration {
+        myHomeConfig = { username ? defaultUsername }: home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs;
           extraSpecialArgs = {
-            inherit inputs;
+            inherit inputs username;
           };
           modules = [ ./nix/home-manager/default.nix ];
         };
