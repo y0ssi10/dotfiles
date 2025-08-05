@@ -19,4 +19,4 @@ jobs:
       - name: setup
         run: bash install.sh
       - name: run the nix application
-        run: nix run .#update -- runner
+        run: nix run .#update runner
