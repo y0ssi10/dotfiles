@@ -6,9 +6,6 @@
   username,
   ...
 }:
-let
-  inherit username;
-in
 {
   nixpkgs = {
     config = {
