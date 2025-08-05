@@ -40,7 +40,7 @@
     }@inputs:
     let
       system = "aarch64-darwin";
-      defaultUsername = "y0ssi10";
+      username = "runner";
       pkgs = import nixpkgs { inherit system; };
     in
     {
@@ -57,7 +57,7 @@
               echo "Updating flake..."
               nix flake update
               echo "Updating home-manager..."
-              nix run nixpkgs#home-manager -- switch --flake .#myHomeConfig --arg username "$USERNAME"
+              nix run nixpkgs#home-manager -- switch --flake .#myHomeConfig
               echo "Updating nix-darwin..."
               nix run nix-darwin -- switch --flake .#y0ssi10-darwin
               echo "Update complete!"
@@ -77,7 +77,7 @@
               echo "Updating flake..."
               nix flake update
               echo "Updating home-manager..."
-              nix run nixpkgs#home-manager -- switch --flake .#myHomeConfig --arg username "$USERNAME"
+              nix run nixpkgs#home-manager -- switch --flake .#myHomeConfig
               echo "Update complete!"
             ''
           );
@@ -103,7 +103,7 @@
       };
 
       homeConfigurations = {
-        myHomeConfig = { username ? defaultUsername }: home-manager.lib.homeManagerConfiguration {
+        myHomeConfig = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs;
           extraSpecialArgs = {
             inherit inputs username;
