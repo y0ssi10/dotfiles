@@ -51,9 +51,6 @@
             pkgs.writeShellScript "update-script" ''
               set -e
 
-              USERNAME="''${1:-${defaultUsername}}"
-              echo "Using username: $USERNAME"
-
               echo "Updating flake..."
               nix flake update
               echo "Updating home-manager..."
@@ -70,9 +67,6 @@
           program = toString (
             pkgs.writeShellScript "update-script" ''
               set -e
-
-              USERNAME="''${1:-${defaultUsername}}"
-              echo "Using username: $USERNAME"
 
               echo "Updating flake..."
               nix flake update
