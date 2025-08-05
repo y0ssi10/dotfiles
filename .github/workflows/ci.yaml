@@ -1,0 +1,22 @@
+name: macOS
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  run-nix-application:
+    runs-on: macOS-latest
+    permissions:
+      id-token: "write"
+      contents: "read"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/determinate-nix-action@v3
+      - uses: DeterminateSystems/magic-nix-cache-action@v13
+      - name: setup
+        run: bash install.sh
+      - name: c
+        run: nix run .#update
