@@ -17,11 +17,11 @@ which brew >> /dev/null || die "brew is required."
 eval "$(/opt/homebrew/bin/brew shellenv)"
 # brew doctor || die "brew doctor raised error."
 
-echo "  Updating Homebrew..."
+echo "  Updating Homebrew."
 brew update
 
 if [ -e "$brew_list" ]; then
-  echo "  Installing some apps..."
+  echo "  Installing some apps."
    brew bundle install --file="$brew_list"
 else
   echo "  Brewfile is needed."
