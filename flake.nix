@@ -81,6 +81,7 @@
           program = toString (
             pkgs.writeShellScript "update-script" ''
               set -e
+
               echo "Updating flake..."
               nix flake update
               echo "Updating nix-darwin..."
