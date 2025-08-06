@@ -31,7 +31,8 @@
   };
 
   system = {
-    stateVersion = 5;
+    stateVersion = 6;
+    primaryUser = "y0ssi10";
     defaults = {
       NSGlobalDomain = {
         AppleShowAllExtensions = true;
