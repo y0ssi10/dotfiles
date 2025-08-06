@@ -18,5 +18,7 @@ jobs:
         uses: DeterminateSystems/flake-checker-action@v12
       - name: Install Nix
         uses: DeterminateSystems/determinate-nix-action@v3.8.5
+      - name: Build home configuration
+        run: nix run nixpkgs#home-manager -- build --flake .#myHomeConfig
       - name: Build darwin configuration
         run: nix build .#darwinConfigurations."y0ssi10-darwin".system
