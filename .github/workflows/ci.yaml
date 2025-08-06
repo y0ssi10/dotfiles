@@ -19,4 +19,4 @@ jobs:
       - name: setup
         run: bash install.sh
       - name: run the nix application
-        run: sudo nix run .#update
+        run: nix run .#update
