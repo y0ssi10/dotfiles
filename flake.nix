@@ -92,9 +92,11 @@
         };
       };
 
-      darwinConfigurations.y0ssi10-darwin = nix-darwin.lib.darwinSystem {
-        system = system;
-        modules = [ ./nix/nix-darwin/default.nix ];
+      darwinConfigurations = {
+        y0ssi10-darwin = nix-darwin.lib.darwinSystem {
+          system = system;
+          modules = [ ./nix/nix-darwin/default.nix ];
+        };
       };
 
       homeConfigurations = {
