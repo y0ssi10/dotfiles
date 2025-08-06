@@ -21,4 +21,4 @@ jobs:
       - name: Build home configuration
         run: nix run nixpkgs#home-manager -- build --flake .#myHomeConfig
       - name: Build darwin configuration
-        run: nix build .#darwinConfigurations."y0ssi10-darwin".system
+        run: nix run nix-darwin -- build --flake .#y0ssi10-darwin
