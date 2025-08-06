@@ -53,7 +53,7 @@
         # Documents    : `PfDo`
         # All My Files : `PfAF`
         # Other…       : `PfLo`
-        NewWindowTarget = "PfHm";
+        NewWindowTarget = "Home";
       };
 
       dock = {
