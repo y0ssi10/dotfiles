@@ -33,24 +33,18 @@
   system = {
     stateVersion = 5;
     defaults = {
-      NSGlobal = {
-        NSScrollViewRubberbanding = false;
-
-        # Keyboard
+      NSGlobalDomain = {
+        AppleShowAllExtensions = true;
+        AppleShowAllFiles = true;
         AppleKeyboardUIMode = 3;
         InitialKeyRepeat = 10;
         KeyRepeat = 1;
-
-        # trackpad
-        AppleEnableSwipeNavigateWithScrolls = true;
       };
 
       finder = {
         AppleShowAllFiles = true;
         AppleShowAllExtensions = true;
-        DisableAllAnimations = true;
         ShowPathbar = true;
-        ShowTabView = true;
         # Set default path for new windows.
         # Computer     : `PfCm`
         # Volume       : `PfVo`
@@ -60,12 +54,6 @@
         # All My Files : `PfAF`
         # Other…       : `PfLo`
         NewWindowTarget = "PfHm";
-        AnimateInfoPanes = false;
-      };
-
-      trackpad = {
-        TrackpadThreeFingerHorizSwipeGesture = 0;
-        TrackpadThreeFingerVertSwipeGesture = 0;
       };
 
       dock = {
@@ -76,19 +64,6 @@
         show-recents = false;
         wvous-br-corner = 4;
         mru-spaces = false;
-
-      };
-
-      "com.apple.menuextra.clock" = {
-        DateFormat = "M\u6708d\u65e5(EEE)  H:mm:ss";
-      };
-
-      "com.apple.desktopservices" = {
-        DSDontWriteNetworkStores = true;
-      };
-
-      "com.apple.screencapture" = {
-        disable-shadow = true;
       };
     };
 
