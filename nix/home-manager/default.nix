@@ -133,7 +133,7 @@
   # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.fd.enable
   programs.fd.enable = true;
   programs.fzf.enable = true;
-  programs.ghostty.enable = true;
+  # programs.ghostty.enable = true;
   programs.lazygit.enable = true;
   programs.mise.enable = true;
   programs.navi.enable = true;
