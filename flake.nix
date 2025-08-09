@@ -1,8 +1,8 @@
 {
-  description = "dotfiles managed with nix-darwin and home-manager";
+  description = "My package definition";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
@@ -25,23 +25,32 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-darwin }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      nix-darwin,
+      ...
+    }@inputs:
     let
       system = "aarch64-darwin";
-      username = "y0ssi10";
+      username = "runner";
       pkgs = import nixpkgs { inherit system; };
-    in {
+    in
+    {
       apps.${system} = {
         update = {
           type = "app";
           program = toString (
             pkgs.writeShellScript "update-script" ''
               set -e
+
               echo "Updating flake..."
               nix flake update
               echo "Updating home-manager..."
@@ -58,20 +67,21 @@
           program = toString (
             pkgs.writeShellScript "update-script" ''
               set -e
+
               echo "Updating flake..."
               nix flake update
-              echo "Updating home-manager"
+              echo "Updating home-manager..."
               nix run nixpkgs#home-manager -- switch --flake .#myHomeConfig
               echo "Update complete!"
             ''
           );
         };
-
         update-darwin = {
           type = "app";
           program = toString (
             pkgs.writeShellScript "update-script" ''
               set -e
+
               echo "Updating flake..."
               nix flake update
               echo "Updating nix-darwin..."
@@ -82,20 +92,21 @@
         };
       };
 
-      darwinConfigurations.y0ssi10-darwin = nix-darwin.lib.darwinSystem {
-        system = system;
-        modules = [ ./nix/nix-darwin/default.nix ];
+      darwinConfigurations = {
+        y0ssi10-darwin = nix-darwin.lib.darwinSystem {
+          system = system;
+          modules = [ ./nix/nix-darwin/default.nix ];
+        };
       };
 
       homeConfigurations = {
         myHomeConfig = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs;
           extraSpecialArgs = {
-            inherit inputs;
+            inherit inputs username;
           };
           modules = [ ./nix/home-manager/default.nix ];
         };
       };
     };
 }
-
