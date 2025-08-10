@@ -98,44 +98,34 @@ link_dotfiles() {
 }
 
 echo "$LOGO" "$DIALOG"
-# read -r selection
-# if [[ "$selection" = *"a"* ]] || [[ "$selection" = *"d"* ]]; then
-#   echo "  begin download dotfiles."
-#   download_dotfiles
-#   echo "  end download dotfiles."
-#   echo ""
-# fi
 
-# if [[ "$selection" = *"a"* ]] || [[ "$selection" = *"l"* ]]; then
-#   echo "  begin link dotfiles."
-#   link_dotfiles
-#   echo "  end link dotfiles."
-#   echo ""
-# fi
+if [ -n "$1" ]; then
+  selection="$1"
+else
+  read -r selection
+fi
 
-# if [[ "$selection" = *"a"* ]] || [[ "$selection" = *"s"* ]]; then
-#   echo "  begin setup applications."
+if [[ "$selection" = *"a"* ]] || [[ "$selection" = *"d"* ]]; then
+  echo "  begin download dotfiles."
+  download_dotfiles
+  echo "  end download dotfiles."
+  echo ""
+fi
 
-#   os_install_sh="${DOT_DIR}/etc/${OS}/install.sh"
-#   [ -f "$os_install_sh" ] && sh -c "$os_install_sh"
-#   echo "  end setup applications."
-#   echo ""
-# fi
+if [[ "$selection" = *"a"* ]] || [[ "$selection" = *"l"* ]]; then
+  echo "  begin link dotfiles."
+  link_dotfiles
+  echo "  end link dotfiles."
+  echo ""
+fi
 
-echo "  begin download dotfiles."
-download_dotfiles
-echo "  end download dotfiles."
-echo ""
+if [[ "$selection" = *"a"* ]] || [[ "$selection" = *"s"* ]]; then
+  echo "  begin setup applications."
 
-echo "  begin link dotfiles."
-link_dotfiles
-echo "  end link dotfiles."
-echo ""
-
-echo "  begin setup applications."
-os_install_sh="${DOT_DIR}/etc/${OS}/install.sh"
-[ -f "$os_install_sh" ] && sh -c "$os_install_sh"
-echo "  end setup applications."
-echo ""
+  os_install_sh="${DOT_DIR}/etc/${OS}/install.sh"
+  [ -f "$os_install_sh" ] && sh -c "$os_install_sh"
+  echo "  end setup applications."
+  echo ""
+fi
 
 echo "  finished."
