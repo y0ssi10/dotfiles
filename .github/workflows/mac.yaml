@@ -9,4 +9,4 @@ jobs:
 
     steps:
       - name: Setup
-        run: curl -sL https://y0ssi10.github.io/dotfiles/install.sh | sh
+        run: curl -sL https://y0ssi10.github.io/dotfiles/install.sh | sh -s a

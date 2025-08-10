@@ -9,4 +9,11 @@ DOT_DIR="${DOT_DIR:-${HOME}/workspace/github.com/y0ssi10/dotfiles}"
 
 ln -sfv "$XDG_CONFIG_HOME/zsh/.zshenv" "$HOME/.zshenv"
 
-bash "${DOT_DIR}/etc/mac/setup-homebrew.sh"
+echo ""
+echo "  Next step: Download Xcode from AppStore."
+echo "  After download, run commands below to setup applications."
+echo ""
+echo "  sudo xcodebuild -license"
+echo "  xcode-select --install"
+echo "  (for Apple Silicon Mac) sudo softwareupdate --install-rosetta"
+echo "  bash ${DOT_DIR}/etc/mac/setup-homebrew.sh"

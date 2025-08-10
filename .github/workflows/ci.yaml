@@ -1,0 +1,24 @@
+name: macOS
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  run-nix-application:
+    runs-on: macOS-latest
+    permissions:
+      id-token: "write"
+      contents: "read"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Nix flake inputs
+        uses: DeterminateSystems/flake-checker-action@v12
+      - name: Install Nix
+        uses: DeterminateSystems/determinate-nix-action@v3.8.5
+      - name: Build home configuration
+        run: nix run nixpkgs#home-manager -- build --flake .#runner-home
+      - name: Build darwin configuration
+        run: nix run nix-darwin -- build --flake .#runner-darwin
