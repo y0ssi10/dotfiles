@@ -9,11 +9,11 @@ alias ..='cd ..'
 case "$OSTYPE" in
   darwin*)
     path=(
-        "/opt/homebrew/opt/coreutils/libexec/gnubin"(N-/)
-        "/opt/homebrew/opt/findutils/libexec/gnubin"(N-/)
-        "/opt/homebrew/opt/gnu-sed/libexec/gnubin"(N-/)
-        "/opt/homebrew/opt/grep/libexec/gnubin"(N-/)
-        "/opt/homebrew/opt/make/libexec/gnubin"(N-/)
+#        "/opt/homebrew/opt/coreutils/libexec/gnubin"(N-/)
+#        "/opt/homebrew/opt/findutils/libexec/gnubin"(N-/)
+#        "/opt/homebrew/opt/gnu-sed/libexec/gnubin"(N-/)
+#        "/opt/homebrew/opt/grep/libexec/gnubin"(N-/)
+#        "/opt/homebrew/opt/make/libexec/gnubin"(N-/)
         "$path[@]"
     )
     alias pp='pbcopy'

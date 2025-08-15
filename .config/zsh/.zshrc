@@ -6,6 +6,8 @@ typeset -gU PATH path
 typeset -gU FPATH fpath
 
 path=(
+  "$HOME/.local/bin"(N-/)
+  "$XDG_STATE_HOME/nix/profiles/profile/bin"(N-/)
   "/opt/homebrew/bin"(N-/) # for Apple Silicon
   "/opt/homebrew/sbin"(N-/) # for Apple Silicon
   "/usr/bin"(N-/)
@@ -14,7 +16,6 @@ path=(
   "/sbin"(N-/)
   "/usr/local/bin"(N-/)
   "/usr/local/sbin"(N-/)
-  "$HOME/.local/bin"(N-/)
   "$CARGO_HOME/bin"(N-/)
   "$GOPATH/bin"(N-/)
   "$XDG_CONFIG_HOME/scripts/bin"(N-/)

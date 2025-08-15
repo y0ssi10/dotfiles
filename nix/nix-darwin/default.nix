@@ -7,18 +7,10 @@
 {
   nix = {
     optimise.automatic = true;
-    gc = {
-      automatic = true;
-      interval = {
-        Hour = 9;
-        Minute = 0;
-      };
-      options = "--delete-older-than 14d";
-    };
     settings = {
       experimental-features = "nix-command flakes";
-      use-xdg-base-directories = true;
       max-jobs = 8;
+      trusted-users = ["root" "admin"];
     };
   };
 
@@ -38,7 +30,7 @@
 
   system = {
     stateVersion = 6;
-    primaryUser = username;
+    primaryUser = if builtins.getEnv "USER" == "runner" then builtins.getEnv "USER" else "admin";
     defaults = {
       NSGlobalDomain = {
         AppleShowAllExtensions = true;
@@ -92,32 +84,25 @@
 
     casks = [
       # GPU-accelerated terminal emulator
+      "ghostty"
       "alacritty"
       # Chromium based browser
-      "arc"
-      # App for managing battery charging. (Also installs a CLI on first use.)
-      "battery"
-      # Tool to customise input devices and automate computer systems
-      "bettertouchtool"
+      # "arc"
       # Write, edit, and chat about your code with AI
       "cursor"
-      "font-udev-gothic-nf"
+      # "font-udev-gothic-nf"
       # Web browser
-      "google-chrome"
+      # "google-chrome"
       # Japanese input software
-      "google-japanese-ime"
-      # Keymap tool for Happy Hacking Keyboard Professional (Hybrid models only)
-      "hhkb"
-      # Software for Logitech devices
-      "logi-options+"
+      # "google-japanese-ime"
       # Replacement for Docker Desktop
-      "orbstack"
+      # "orbstack"
       # Collaboration platform for API development
       "postman"
       # Control your tools with a few keystrokes
       "raycast"
       # Open-source code editor
-      "visual-studio-code"
+      # "visual-studio-code"
     ];
   };
 }

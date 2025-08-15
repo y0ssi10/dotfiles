@@ -91,7 +91,7 @@
       };
 
       darwinConfigurations = {
-        y0ssi10-darwin = nix-darwin.lib.darwinSystem {
+        all = nix-darwin.lib.darwinSystem {
           system = system;
           specialArgs = {
             username = "y0ssi10";
@@ -110,18 +110,10 @@
       };
 
       homeConfigurations = {
-        y0ssi10-home = home-manager.lib.homeManagerConfiguration {
+        home = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs;
           extraSpecialArgs = {
             username = "y0ssi10";
-            inherit inputs;
-          };
-          modules = [ ./nix/home-manager/default.nix ];
-        };
-        runner-home = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgs;
-          extraSpecialArgs = {
-            username = "runner";
             inherit inputs;
           };
           modules = [ ./nix/home-manager/default.nix ];

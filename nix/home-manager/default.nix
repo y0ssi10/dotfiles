@@ -3,9 +3,12 @@
   lib,
   config,
   pkgs,
-  username,
   ...
 }:
+let
+    username = if builtins.getEnv "USER" == "runner" then builtins.getEnv "USER" else "admin";
+    homeDirectory = if pkgs.stdenv.isLinux then "/home/${username}" else "/Users/${username}";
+in
 {
   nixpkgs = {
     config = {
@@ -14,9 +17,12 @@
   };
 
   home = {
-    username = username;
-    homeDirectory = "/Users/${username}";
+    inherit username;
+    inherit homeDirectory;    
     stateVersion = "25.11";
+    sessionVariables = {
+      STARSHIP_SHELL = "zsh";
+    };
     packages = with pkgs; [
       bash
       # bat
@@ -47,7 +53,7 @@
       # keyring
       kind
       # lazygit
-      # mise
+      mise
       # navi
       # neovim
       # nkf
@@ -62,6 +68,9 @@
       nix-zsh-completions
       lazydocker
     ];
+    file = {
+      ".zshenv".source = ./../../.config/zsh/.zshenv;
+    };
   };
 
   xdg = {
@@ -70,9 +79,20 @@
     cacheHome  = "${config.home.homeDirectory}/.cache";
     dataHome   = "${config.home.homeDirectory}/.local/share";
     stateHome  = "${config.home.homeDirectory}/.local/state";
+
+    configFile = {
+      "starship.toml".source = ./../../.config/starship/starship.toml;
+      "zsh/.zshrc".source = ./../../.config/zsh/.zshrc;
+      "zsh/lazy.zsh".source = ./../../.config/zsh/lazy.zsh;
+      "zsh/plugins.toml".source = ./../../.config/zsh/plugins.toml;
+      "git/config".source = ./../../.config/git/config;
+      "mise/config.toml".source = ./../../.config/mise/config.toml;
+      "gnupg/gpg-agent.conf".source = ./../../.config/gnupg/gpg-agent.conf;
+      "scripts".source = ./../../.config/scripts;
+      "scripts".recursive = true;
+    };
   };
 
-  programs.home-manager.enable = true;
   programs.gh = {
     enable = true;
     settings = {
@@ -134,10 +154,10 @@
   programs.fd.enable = true;
   programs.fzf.enable = true;
   # programs.ghostty.enable = true;
-  programs.lazygit.enable = true;
-  programs.mise.enable = true;
-  programs.navi.enable = true;
-  programs.neovim.enable = true;
+  # programs.lazygit.enable = true;
+  # programs.mise.enable = true;
+  # programs.navi.enable = true;
+  # programs.neovim.enable = true;
   programs.ripgrep = {
     enable = true;
     arguments = [
@@ -148,6 +168,6 @@
     ];
   };
   # programs.tmux.enable = true;
-  programs.vim.enable = true;
+  # programs.vim.enable = true;
   # programs.zsh.enable = true;
 }
