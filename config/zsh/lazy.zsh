@@ -169,6 +169,9 @@ alias python="python3"
 alias pip="pip3"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"
 
+## kubectl ###
+alias k='kubectl'
+
 ### local ###
 if [[ -f "$ZDOTDIR/local.zsh" ]]; then
     source "$ZDOTDIR/local.zsh"

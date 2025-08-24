@@ -6,6 +6,7 @@ typeset -gU PATH path
 typeset -gU FPATH fpath
 
 path=(
+  "$MISE_DATA_DIR/shims"(N-/)
   "/opt/homebrew/bin"(N-/) # for Apple Silicon
   "/opt/homebrew/sbin"(N-/) # for Apple Silicon
   "/usr/bin"(N-/)
@@ -18,7 +19,6 @@ path=(
   "$CARGO_HOME/bin"(N-/)
   "$GOPATH/bin"(N-/)
   "$XDG_CONFIG_HOME/scripts/bin"(N-/)
-  "$MISE_DATA_DIR/shims"(N-/)
   "$XDG_DATA_HOME/npm/bin"(N-/)
   "$path[@]"
 )
