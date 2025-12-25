@@ -49,13 +49,12 @@ in
           k9s
           kubectl
           kind
+          lazydocker
           lazygit
           mise
           navi
           neovim
           nkf
-          ripgrep
-          lazydocker
           nix-zsh-completions
           ripgrep
           sheldon
