@@ -1,153 +1,117 @@
 {
-  inputs,
-  lib,
-  config,
-  pkgs,
+  system,
   username,
-  ...
+  home-manager,
+  pkgs,
 }:
+let
+  homeDirectory =
+    if pkgs.stdenv.hostPlatform.isDarwin then
+      "/Users/${username}"
+    else
+      throw "Unsupported system: ${system}";
+in
 {
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-  };
-
-  home = {
-    username = username;
-    homeDirectory = "/Users/${username}";
-    stateVersion = "25.11";
-    packages = with pkgs; [
-      bash
-      # bat
-      gettext
-      coreutils
-      curl
-      diffutils
-      # direnv
-      # docker-completion
-      # docker
-      # eza
-      # fastfetch
-      fd
-      findutils
-      # fzf
-      gawk
-      # gh
-      ghq
-      # ghr
-      git
-      # git-secrets
-      gnused
-      gnupg
-      gnugrep
-      jq
-      k9s
-      kubectl
-      # keyring
-      kind
-      # lazygit
-      # mise
-      # navi
-      # neovim
-      # nkf
-      # ripgrep
-      sheldon
-      shellcheck
-      starship
-      tmux
-      # vim
-      zsh
-      yq
-      nix-zsh-completions
-      lazydocker
+  default = home-manager.lib.homeManagerConfiguration {
+    inherit pkgs;
+    modules = [
+      {
+        home = {
+          inherit username;
+          homeDirectory = homeDirectory;
+          stateVersion = "25.11";
+        };
+        programs.home-manager.enable = true;
+      }
+      {
+        home.packages = with pkgs; [
+          bash
+          bat
+          coreutils
+          curl
+          diffutils
+          direnv
+          docker
+          eza
+          fastfetch
+          fd
+          findutils
+          fzf
+          gawk
+          gettext
+          gh
+          ghq
+          git
+          gnused
+          gnupg
+          gnugrep
+          jq
+          k9s
+          kubectl
+          kind
+          lazydocker
+          lazygit
+          mise
+          navi
+          neovim
+          nkf
+          nix-zsh-completions
+          ripgrep
+          sheldon
+          shellcheck
+          starship
+          tmux
+          vim
+          yq
+        ];
+      }
+      {
+        home.file.".zshenv".text = ''
+          # Set ZDOTDIR before loading the actual .zshenv
+          export XDG_CONFIG_HOME="${homeDirectory}/.config"
+          export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+          
+          # Source the actual .zshenv from ZDOTDIR
+          if [[ -f "$ZDOTDIR/.zshenv" ]]; then
+            source "$ZDOTDIR/.zshenv"
+          fi
+        '';
+      }
+      {
+        xdg = {
+          enable = true;
+          configHome = "${homeDirectory}/.config";
+          cacheHome  = "${homeDirectory}/.cache";
+          dataHome   = "${homeDirectory}/.local/share";
+          stateHome  = "${homeDirectory}/.local/state";
+          configFile = {
+            "alacritty/alacritty.toml".source = ./../../.config/alacritty/alacritty.toml;
+            "bat/config".source = ./../../.config/bat/config;
+            "direnv/direnv.toml".source = ./../../.config/direnv/direnv.toml;
+            "gh/config.yml".source = ./../../.config/gh/config.yml;
+            "git/config".source = ./../../.config/git/config;
+            "git/ignore".source = ./../../.config/git/ignore;
+            "gnupg/gpg-agent.conf".source = ./../../.config/gnupg/gpg-agent.conf;
+            "lazygit/config.yml".source = ./../../.config/lazygit/config.yml;
+            "mise/config.toml".source = ./../../.config/mise/config.toml;
+            "navi/config.yaml".source = ./../../.config/navi/config.yaml;
+            "navi/snippets".source = ./../../.config/navi/snippets;
+            "navi/snippets".recursive = true;
+            "npm/npmrc".source = ./../../.config/npm/npmrc;
+            "python/startup.py".source = ./../../.config/python/startup.py;
+            "scripts".source = ./../../.config/scripts;
+            "scripts".recursive = true;
+            "starship.toml".source = ./../../.config/starship/starship.toml;
+            "tmux".source = ./../../.config/tmux;
+            "tmux".recursive = true;
+            "zsh/.zshrc".source = ./../../.config/zsh/.zshrc;
+            "zsh/.zshenv".source = ./../../.config/zsh/.zshenv;
+            "zsh/.zprofile".source = ./../../.config/zsh/.zprofile;
+            "zsh/lazy.zsh".source = ./../../.config/zsh/lazy.zsh;
+            "zsh/plugins.toml".source = ./../../.config/zsh/plugins.toml;
+          };
+        };
+      }
     ];
   };
-
-  xdg = {
-    enable = true;
-    configHome = "${config.home.homeDirectory}/.config";
-    cacheHome  = "${config.home.homeDirectory}/.cache";
-    dataHome   = "${config.home.homeDirectory}/.local/share";
-    stateHome  = "${config.home.homeDirectory}/.local/state";
-  };
-
-  programs.home-manager.enable = true;
-  programs.gh = {
-    enable = true;
-    settings = {
-      git_protocol = "ssh";
-      prompt = "enabled";
-      aliases = {
-        co = "pr checkout";
-        open = "repo view --web";
-        create-pr = "pr create --assignee @me --fill --web";
-      };
-    };
-    extensions = with pkgs; [
-      gh-copilot
-      gh-dash
-      gh-markdown-preview
-      gh-notify
-    ];
-  };
-
-  # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.alacritty.enable
-  # programs.alacritty.enable = true;
-  programs.bat = {
-    enable = true;
-    extraPackages = with pkgs.bat-extras; [
-      batdiff
-      batgrep
-      batman
-      batpipe
-      batwatch
-      prettybat
-    ];
-  };
-
-  # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.bat.enable
-  programs.direnv = {
-    enable = true;
-    # config = {
-    #   disable_stdin = true;
-    #   strict_env = true;
-    #   warn_timeout = 0;
-    # };
-    # nix-direnv.enable = true;
-  };
-
-  # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.eza.enable
-  programs.eza = {
-    enable = true;
-    colors = "auto";
-    git = true;
-    icons = "auto";
-    extraOptions = [
-      "--group-directories-first"
-    ];
-  };
-
-  # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.fastfetch.enable
-  programs.fastfetch.enable = true;
-  # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.fd.enable
-  programs.fd.enable = true;
-  programs.fzf.enable = true;
-  # programs.ghostty.enable = true;
-  programs.lazygit.enable = true;
-  programs.mise.enable = true;
-  programs.navi.enable = true;
-  programs.neovim.enable = true;
-  programs.ripgrep = {
-    enable = true;
-    arguments = [
-      "--hidden"
-      "--smart-case"
-
-      "--glob=!.git/"
-    ];
-  };
-  # programs.tmux.enable = true;
-  programs.vim.enable = true;
-  # programs.zsh.enable = true;
 }

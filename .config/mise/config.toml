@@ -5,7 +5,7 @@
 [settings]
 # plugins can read the versions files used by other version managers (if enabled by the plugin)
 # for example, .nvmrc in the case of node's nvm
-legacy_version_file = true         # デフォルトで有効（asdfと異なる）
+legacy_version_file = false
 
 # configure `mise install` to always keep the downloaded archive
 always_keep_download = false        # deleted after install by default
