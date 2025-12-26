@@ -10,6 +10,11 @@
 [core]
   autocrlf = false
   ignoreCase = false
+  pager = delta --side-by-side
+
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
 
 [diff]
   algorithm = histogram
@@ -22,6 +27,9 @@
 
 [init]
   defaultBranch = main
+
+[interactive]
+  diffFilter = delta --color-only
 
 [merge]
   ff = false

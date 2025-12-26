@@ -29,6 +29,7 @@ in
           bat
           coreutils
           curl
+          delta
           diffutils
           direnv
           docker
@@ -70,7 +71,7 @@ in
           # Set ZDOTDIR before loading the actual .zshenv
           export XDG_CONFIG_HOME="${homeDirectory}/.config"
           export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-          
+
           # Source the actual .zshenv from ZDOTDIR
           if [[ -f "$ZDOTDIR/.zshenv" ]]; then
             source "$ZDOTDIR/.zshenv"
