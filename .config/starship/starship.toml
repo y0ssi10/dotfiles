@@ -1,67 +1,110 @@
-command_timeout	= 1200
-scan_timeout = 10
+format = '$all'
 
-[aws]
-format = 'on [$symbol($profile )(\($region\) )]($style)'
-style = "bold blue"
-symbol = "🅰 "
-
-[aws.region_aliases]
-ap-northeast-1 = "jp"
-
-[battery]
-full_symbol = "🔋 "
-charging_symbol = "⚡️ "
-discharging_symbol = "💀 "
-
-[[battery.display]]
-threshold = 20
-style = "bold red"
-
+# ----- general -----
 [character]
-success_symbol = "[➜](bold green) "
-error_symbol = "[✗](bold red) "
+success_symbol = '[❯](bold #777777)'
+error_symbol = '[❯❯❯](bold red)'
 
 [directory]
-truncation_length = 100
+truncation_length = 0
 truncate_to_repo = false
-truncation_symbol = "…/"
-
-[docker_context]
-format = "via [🐋 $context](blue bold)"
+style = 'bold #777777'
+before_repo_root_style='bold #777777'
+repo_root_style='bold blue'
+format='''[$path]($style)[$read_only]($read_only_style)
+'''
+repo_root_format="""[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path](bold #F1502F)[$read_only]($read_only_style)
+"""
 
 [git_branch]
-format = "on [$symbol$branch]($style) "
-symbol = "🌱 "
-style = "bold yellow"
+format = '[󰊢 ](bold #F1502F)[$symbol$branch]($style) '
+symbol = ' '
 
 [git_commit]
 commit_hash_length = 4
 style = "bold white"
 tag_symbol = "🔖 "
 
-[kubernetes]
-disabled = false
-format = 'on [⛵ $context\\($namespace\\)](cyan bold) in '
-style = "bold green"
-
-[username]
-style_user = "white bold"
-style_root = "black bold"
-format = "[$user🌱]($style) "
-disabled = false
-show_always = true
-
-[memory_usage]
-format = "[$symbol$ram]($style) "
-
-[custom.arch]
-command = "uname -m"
-when = """ test $(uname -m) = "x86_64" """
-style = "bold yellow"
-format = "[$output]($style)"
+[git_status]
+format = '[$all_status$ahead_behind]($style)'
+ahead = '󰇘  ${count} '
+behind = '󰇘  ${count} '
+diverged = '󰇘  ${ahead_count}  ${behind_count}'
+typechanged = '[󰑕 ${count}](bold #FF7777) '
+conflicted = ' ${count} '
+stashed = '󰽄 ${count} '
+deleted = '[ ${count}](bold red) '
+renamed = '[󰮆 ${count}](bold #FF7777) '
+modified = '[ ${count}](bold blue) '
+staged = '[󰆼 ${count}](bold yellow) '
+untracked = '[ ${count}](bold green) '
 
 [custom.git_email]
 command = "git config user.email | awk -F '[@]' '{print $2}'"
 when = """ git status """
-format = "📨 [$output]($style) "
+format = "by 󰇮 [$output]($style) "
+
+[shell]
+disabled = false
+zsh_indicator = '[ ](white)'
+
+[sudo]
+format = '[as $symbol]($style)'
+
+# ----- containers -----
+[docker_context]
+format = "via [󰡨 $context](blue bold)"
+
+[kubernetes]
+disabled = false
+symbol = "󱃾 "
+format = 'on [$symbol $context\($namespace\)](cyan bold) in '
+style = "bold green"
+
+# ----- languages -----
+[golang]
+format = '[$symbol($version)]($style) '
+symbol = ' '
+
+[java]
+format = '[$symbol($version)]($style) '
+symbol = ' '
+
+[nodejs]
+format = '[$symbol($version)]($style) '
+symbol = '󰎙 '
+detect_files = ["!bun.lockb", "!bunfig.toml", "package.json", ".node-version", "!deno.json", "!deno.jsonc", "!deno.lock"]
+
+[python]
+format = '[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style) '
+symbol = ' '
+
+[rust]
+format = '[$symbol($version)]($style) '
+symbol = ' '
+
+[scala]
+format = '[$symbol($version)]($style) '
+symbol = ' '
+
+# ----- cloud -----
+[aws]
+format = 'on [$symbol($profile )(\($region\) )]($style)'
+style = "bold blue"
+symbol = '󰸏 '
+
+[aws.region_aliases]
+ap-northeast-1 = "jp"
+
+# ----- disabled -----
+[memory_usage]
+disabled = true
+
+[os]
+disabled = true
+
+[package]
+disabled = true
+
+[username]
+disabled = true
