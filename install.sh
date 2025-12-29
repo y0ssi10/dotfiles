@@ -110,7 +110,7 @@ install_homebrew() {
   has "brew" || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   has "brew" || die "brew is required."
 
-  eval "$(/opt/homebrew/bin/bew shellenv)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
   brew doctor || die "brew doctor raised error."
 
   echo "  Updating Homebrew..."
