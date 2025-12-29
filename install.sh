@@ -130,6 +130,8 @@ bootstrap_nix() {
     [ ! -f /etc/zshrc ] || sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin
     [ ! -f /etc/zprofile ] || sudo mv /etc/zprofile /etc/zprofile.before-nix-darwin
 
+    nix run
+
     # To use flake.nix and default configuration stored in dotfiles repo:
     echo "Bootstrapping nix with 'default' configuration successfully."
   } || {
