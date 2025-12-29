@@ -107,12 +107,17 @@ install_nix() {
 
 install_homebrew() {
   has "curl" || die "curl is required."
-  has "brew" || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  if has "brew"; then
+    echo "Homebrew is already installed."
+  else
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    echo "Homebrew installed successfully."
+  fi
+  eval "$(/opt/homebrew/bin/brew shellenv)"
   has "brew" || die "brew is required."
 
-  eval "$(/opt/homebrew/bin/brew shellenv)"
   # brew doctor || die "brew doctor raised error."
-
   echo "  Updating Homebrew..."
   brew update
 }
