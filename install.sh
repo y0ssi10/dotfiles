@@ -111,7 +111,7 @@ install_homebrew() {
   has "brew" || die "brew is required."
 
   eval "$(/opt/homebrew/bin/brew shellenv)"
-  brew doctor || die "brew doctor raised error."
+  # brew doctor || die "brew doctor raised error."
 
   echo "  Updating Homebrew..."
   brew update
