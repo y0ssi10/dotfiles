@@ -124,6 +124,9 @@ install_homebrew() {
 
 bootstrap_nix() {
   echo "Bootstrapping nix with 'default' configuration..."
+
+  cd "$DOT_DIR" || die "Failed to change directory to $DOT_DIR"
+
   {
     echo "Backing up /etc/* files..."
     [ ! -f /etc/zshenv ] || sudo mv /etc/zshenv /etc/zshenv.before-nix-darwin
