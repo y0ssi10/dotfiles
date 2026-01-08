@@ -35,6 +35,7 @@ DIALOG="
   [s] only setup applications
   [i] only install Xcode, Homebrew and Nix
   [b] only bootstrap Nix
+  [m] only install mise tools
   You can use multiple choose like 'dl'
 "
 
@@ -146,6 +147,11 @@ bootstrap_nix() {
   }
 }
 
+install_mise_tools() {
+  has "mise" || die "mise is required."
+  mise install -g
+}
+
 download_dotfiles() {
   if [ -d "$DOT_DIR" ]; then
     echo "$DOT_DIR is already exist"
@@ -239,6 +245,13 @@ if [[ "$selection" = *"b"* ]]; then
   echo "  begin bootstrap Nix..."
   bootstrap_nix
   echo "  end bootstrap Nix."
+  echo ""
+fi
+
+if [[ "$selection" = *"m"* ]]; then
+  echo "  begin install mise tools..."
+  install_mise_tools
+  echo "  end install mise tools."
   echo ""
 fi
 
