@@ -1,6 +1,7 @@
 [tools]
 # global tool versions go heare
 # you can set these with `mise use -g`
+deno = "latest"
 
 [settings]
 # plugins can read the versions files used by other version managers (if enabled by the plugin)
