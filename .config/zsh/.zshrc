@@ -33,8 +33,8 @@ fpath=(
 # history
 #############
 export HISTFILE="$XDG_STATE_HOME/zsh_history"
-export HISTSIZE=12000
-export SAVEHIST=10000
+export HISTSIZE=120000
+export SAVEHIST=100000
 
 #############
 # zsh options
