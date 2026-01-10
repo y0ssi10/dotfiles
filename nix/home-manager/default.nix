@@ -105,6 +105,8 @@ in
             "starship.toml".source = ./../../.config/starship/starship.toml;
             "tmux".source = ./../../.config/tmux;
             "tmux".recursive = true;
+            "zeno".source = ./../../.config/zeno;
+            "zeno".recursive = true;
             "zsh/.zshrc".source = ./../../.config/zsh/.zshrc;
             "zsh/.zshenv".source = ./../../.config/zsh/.zshenv;
             "zsh/.zprofile".source = ./../../.config/zsh/.zprofile;
