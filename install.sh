@@ -149,7 +149,7 @@ bootstrap_nix() {
 
 install_mise_tools() {
   has "mise" || die "mise is required."
-  mise install -g
+  mise install
 }
 
 download_dotfiles() {
