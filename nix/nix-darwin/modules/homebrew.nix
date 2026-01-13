@@ -15,6 +15,8 @@
       "arc"
       # App for managing battery charging. (Also installs a CLI on first use.)
       "battery"
+      # Desktop password and login vault
+      "bitwarden"
       # Write, edit, and chat about your code with AI
       "cursor"
       # Dia browser
