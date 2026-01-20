@@ -38,6 +38,8 @@
       "postman"
       # Control your tools with a few keystrokes
       "raycast"
+      # Team communication and collaboration software
+      "slack"
       # Open-source code editor
       "visual-studio-code"
     ];
