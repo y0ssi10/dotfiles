@@ -2,6 +2,7 @@
   system = {
     stateVersion = 6;
     primaryUser = "y0ssi10";
+    startup.chime = false;
     defaults = {
       NSGlobalDomain = {
         "com.apple.sound.beep.feedback" = 0;
