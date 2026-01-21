@@ -19,6 +19,8 @@
       "bitwarden"
       # Write, edit, and chat about your code with AI
       "cursor"
+      # Command-line agent for Cursor
+      "cursor-cli"
       # Dia browser
       "thebrowsercompany-dia"
       "font-udev-gothic-nf"
