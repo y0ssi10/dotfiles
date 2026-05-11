@@ -78,7 +78,7 @@ in
           fi
         '';
       }
-      {
+      ({ config, lib, ... }: {
         xdg = {
           enable = true;
           configHome = "${homeDirectory}/.config";
@@ -92,9 +92,8 @@ in
             "gh/config.yml".source = ./../../.config/gh/config.yml;
             "git/config".source = ./../../.config/git/config;
             "git/ignore".source = ./../../.config/git/ignore;
-            "gnupg/gpg-agent.conf".source = ./../../.config/gnupg/gpg-agent.conf;
             "lazygit/config.yml".source = ./../../.config/lazygit/config.yml;
-            "mise/config.toml".source = ./../../.config/mise/config.toml;
+            "mise/config.toml".source = config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/workspace/github.com/y0ssi10/dotfiles/.config/mise/config.toml";
             "navi/config.yaml".source = ./../../.config/navi/config.yaml;
             "navi/snippets".source = ./../../.config/navi/snippets;
             "navi/snippets".recursive = true;
@@ -113,8 +112,15 @@ in
             "zsh/lazy.zsh".source = ./../../.config/zsh/lazy.zsh;
             "zsh/plugins.toml".source = ./../../.config/zsh/plugins.toml;
           };
+          dataFile = {
+            "gnupg/gpg-agent.conf".source = ./../../.config/gnupg/gpg-agent.conf;
+          };
         };
-      }
+        home.activation.gnupgPermissions = lib.hm.dag.entryAfter ["writeBoundary"] ''
+          mkdir -p "${homeDirectory}/.local/share/gnupg"
+          chmod 700 "${homeDirectory}/.local/share/gnupg"
+        '';
+      })
     ];
   };
 }
