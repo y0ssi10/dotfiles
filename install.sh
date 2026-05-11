@@ -88,7 +88,7 @@ install_nix() {
   else
     echo "Running (determinate) nix installer..."
     # use Determinate Nix installer, https://github.com/DeterminateSystems/nix-installer
-    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm	--determinate
+    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
     echo "Nix installed successfully."
   fi
 
