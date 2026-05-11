@@ -1,7 +1,8 @@
+{ username }:
 {
   system = {
     stateVersion = 6;
-    primaryUser = "y0ssi10";
+    primaryUser = username;
     startup.chime = false;
     defaults = {
       NSGlobalDomain = {

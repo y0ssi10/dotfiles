@@ -23,6 +23,25 @@
     }:
     let
       system = "aarch64-darwin";
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+      mkHomeConfig =
+        username:
+        import ./nix/home-manager {
+          inherit
+            system
+            home-manager
+            pkgs
+            username
+            ;
+        };
+      mkDarwinConfig =
+        username:
+        import ./nix/nix-darwin {
+          inherit system nix-darwin username;
+        };
     in
     {
       apps = (
@@ -31,21 +50,16 @@
         }
       );
 
-      darwinConfigurations = (
-        import ./nix/nix-darwin {
-          inherit system nix-darwin;
-        }
-      );
+      darwinConfigurations =
+        (mkDarwinConfig "y0ssi10")
+        // {
+          runner = (mkDarwinConfig "runner").default;
+        };
 
-      homeConfigurations = (
-        import ./nix/home-manager {
-          inherit system home-manager;
-          username = "y0ssi10";
-          pkgs = import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-          };
-        }
-      );
+      homeConfigurations =
+        (mkHomeConfig "y0ssi10")
+        // {
+          runner = (mkHomeConfig "runner").default;
+        };
     };
 }
