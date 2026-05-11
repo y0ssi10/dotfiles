@@ -44,6 +44,8 @@
       "slack"
       # Open-source code editor
       "visual-studio-code"
+      # Multiplayer code editor
+      "zed"
     ];
   };
 }
