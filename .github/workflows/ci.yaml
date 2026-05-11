@@ -19,6 +19,6 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/determinate-nix-action@v3.8.5
       - name: Build home configuration
-        run: nix run nixpkgs#home-manager -- build --flake .#runner-home
+        run: nix run nixpkgs#home-manager -- build --flake .#runner
       - name: Build darwin configuration
-        run: nix run nix-darwin -- build --flake .#runner-darwin
+        run: nix run nix-darwin -- build --flake .#runner
