@@ -11,6 +11,9 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+    };
   };
 
   outputs =
@@ -19,6 +22,7 @@
       nixpkgs,
       home-manager,
       nix-darwin,
+      treefmt-nix,
       ...
     }:
     let
@@ -42,6 +46,12 @@
         import ./nix/nix-darwin {
           inherit system nix-darwin username;
         };
+      treefmtEval = treefmt-nix.lib.evalModule pkgs {
+        projectRootFile = "flake.nix";
+        programs = {
+          nixfmt.enable = true;
+        };
+      };
     in
     {
       apps = (
@@ -50,16 +60,16 @@
         }
       );
 
-      darwinConfigurations =
-        (mkDarwinConfig "y0ssi10")
-        // {
-          runner = (mkDarwinConfig "runner").default;
-        };
+      darwinConfigurations = (mkDarwinConfig "y0ssi10") // {
+        runner = (mkDarwinConfig "runner").default;
+      };
 
-      homeConfigurations =
-        (mkHomeConfig "y0ssi10")
-        // {
-          runner = (mkHomeConfig "runner").default;
-        };
+      homeConfigurations = (mkHomeConfig "y0ssi10") // {
+        runner = (mkHomeConfig "runner").default;
+      };
+
+      formatter.${system} = treefmtEval.config.build.wrapper;
+
+      checks.${system}.formatting = treefmtEval.config.build.check self;
     };
 }
