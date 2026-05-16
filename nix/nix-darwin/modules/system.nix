@@ -1,5 +1,12 @@
 { username }:
 {
+
+  security.pam.services.sudo_local = {
+    touchIdAuth = true;
+    watchIdAuth = true;
+    reattach = true;
+  };
+
   system = {
     stateVersion = 6;
     primaryUser = username;
