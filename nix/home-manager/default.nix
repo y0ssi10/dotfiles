@@ -78,49 +78,53 @@ in
           fi
         '';
       }
-      ({ config, lib, ... }: {
-        xdg = {
-          enable = true;
-          configHome = "${homeDirectory}/.config";
-          cacheHome  = "${homeDirectory}/.cache";
-          dataHome   = "${homeDirectory}/.local/share";
-          stateHome  = "${homeDirectory}/.local/state";
-          configFile = {
-            "alacritty/alacritty.toml".source = ./../../.config/alacritty/alacritty.toml;
-            "bat/config".source = ./../../.config/bat/config;
-            "direnv/direnv.toml".source = ./../../.config/direnv/direnv.toml;
-            "gh/config.yml".source = ./../../.config/gh/config.yml;
-            "git/config".source = ./../../.config/git/config;
-            "git/ignore".source = ./../../.config/git/ignore;
-            "lazygit/config.yml".source = ./../../.config/lazygit/config.yml;
-            "mise/config.toml".source = config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/workspace/github.com/y0ssi10/dotfiles/.config/mise/config.toml";
-            "navi/config.yaml".source = ./../../.config/navi/config.yaml;
-            "navi/snippets".source = ./../../.config/navi/snippets;
-            "navi/snippets".recursive = true;
-            "npm/npmrc".source = ./../../.config/npm/npmrc;
-            "python/startup.py".source = ./../../.config/python/startup.py;
-            "scripts".source = ./../../.config/scripts;
-            "scripts".recursive = true;
-            "starship.toml".source = ./../../.config/starship/starship.toml;
-            "tmux".source = ./../../.config/tmux;
-            "tmux".recursive = true;
-            "zeno".source = ./../../.config/zeno;
-            "zeno".recursive = true;
-            "zsh/.zshrc".source = ./../../.config/zsh/.zshrc;
-            "zsh/.zshenv".source = ./../../.config/zsh/.zshenv;
-            "zsh/.zprofile".source = ./../../.config/zsh/.zprofile;
-            "zsh/lazy.zsh".source = ./../../.config/zsh/lazy.zsh;
-            "zsh/plugins.toml".source = ./../../.config/zsh/plugins.toml;
+      (
+        { config, lib, ... }:
+        {
+          xdg = {
+            enable = true;
+            configHome = "${homeDirectory}/.config";
+            cacheHome = "${homeDirectory}/.cache";
+            dataHome = "${homeDirectory}/.local/share";
+            stateHome = "${homeDirectory}/.local/state";
+            configFile = {
+              "alacritty/alacritty.toml".source = ./../../.config/alacritty/alacritty.toml;
+              "bat/config".source = ./../../.config/bat/config;
+              "direnv/direnv.toml".source = ./../../.config/direnv/direnv.toml;
+              "gh/config.yml".source = ./../../.config/gh/config.yml;
+              "git/config".source = ./../../.config/git/config;
+              "git/ignore".source = ./../../.config/git/ignore;
+              "lazygit/config.yml".source = ./../../.config/lazygit/config.yml;
+              "mise/config.toml".source =
+                config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/workspace/github.com/y0ssi10/dotfiles/.config/mise/config.toml";
+              "navi/config.yaml".source = ./../../.config/navi/config.yaml;
+              "navi/snippets".source = ./../../.config/navi/snippets;
+              "navi/snippets".recursive = true;
+              "npm/npmrc".source = ./../../.config/npm/npmrc;
+              "python/startup.py".source = ./../../.config/python/startup.py;
+              "scripts".source = ./../../.config/scripts;
+              "scripts".recursive = true;
+              "starship.toml".source = ./../../.config/starship/starship.toml;
+              "tmux".source = ./../../.config/tmux;
+              "tmux".recursive = true;
+              "zeno".source = ./../../.config/zeno;
+              "zeno".recursive = true;
+              "zsh/.zshrc".source = ./../../.config/zsh/.zshrc;
+              "zsh/.zshenv".source = ./../../.config/zsh/.zshenv;
+              "zsh/.zprofile".source = ./../../.config/zsh/.zprofile;
+              "zsh/lazy.zsh".source = ./../../.config/zsh/lazy.zsh;
+              "zsh/plugins.toml".source = ./../../.config/zsh/plugins.toml;
+            };
+            dataFile = {
+              "gnupg/gpg-agent.conf".source = ./../../.config/gnupg/gpg-agent.conf;
+            };
           };
-          dataFile = {
-            "gnupg/gpg-agent.conf".source = ./../../.config/gnupg/gpg-agent.conf;
-          };
-        };
-        home.activation.gnupgPermissions = lib.hm.dag.entryAfter ["writeBoundary"] ''
-          mkdir -p "${homeDirectory}/.local/share/gnupg"
-          chmod 700 "${homeDirectory}/.local/share/gnupg"
-        '';
-      })
+          home.activation.gnupgPermissions = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+            mkdir -p "${homeDirectory}/.local/share/gnupg"
+            chmod 700 "${homeDirectory}/.local/share/gnupg"
+          '';
+        }
+      )
     ];
   };
 }
