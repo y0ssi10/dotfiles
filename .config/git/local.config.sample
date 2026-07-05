@@ -1,0 +1,14 @@
+# Copy this file to ~/.config/git/local.config (untracked, machine-specific)
+# and fill in your identity. Required because [user] useConfigOnly = true in
+# ./config disables git's automatic name/email guessing.
+
+[user]
+  name = Your Name
+  email = you@example.com
+
+# Optional: use a different identity for repos under a specific directory,
+# e.g. repos cloned via ghq (see [ghq] in ./config) under a given org, such
+# as ~/workspace/github.com/<org>/. The included file is itself untracked, so
+# org names/emails never need to touch this repo.
+# [includeIf "gitdir:~/workspace/github.com/<org>/"]
+#   path = ~/.config/git/work.config

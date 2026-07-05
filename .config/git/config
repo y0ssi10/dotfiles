@@ -55,6 +55,10 @@
 [user]
   useConfigOnly = true
 
+### local (machine-specific, untracked; see .config/git/local.config.sample) ###
+[include]
+  path = ~/.config/git/local.config
+
 ### ghq ###
 [ghq]
   root = ~/workspace
