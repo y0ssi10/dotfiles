@@ -1,4 +1,9 @@
-import { defineConfig, type Snippet, type UserCompletionSource, type FzfOptions } from "jsr:@yuki-yano/zeno";
+import {
+  defineConfig,
+  type Snippet,
+  type UserCompletionSource,
+  type FzfOptions,
+} from "jsr:@yuki-yano/zeno";
 
 // cd
 const cdSnippets: ReadonlyArray<Snippet> = [
@@ -524,9 +529,7 @@ const fzfOptionsFormat: FzfOptions = {
 const dockerCompletions: ReadonlyArray<UserCompletionSource> = [
   {
     name: "docker-build",
-    patterns: [
-      "^\\s*(docker)\\s+(build)\\s+(\\S+\\s+)*$",
-    ],
+    patterns: ["^\\s*(docker)\\s+(build)\\s+(\\S+\\s+)*$"],
     sourceCommand:
       '"$ZENO_SCRIPT_DIR/options.zsh" "docker/build-options" "󰈻" "option" "blue"',
     options: fzfOptionsFormat,
@@ -534,9 +537,7 @@ const dockerCompletions: ReadonlyArray<UserCompletionSource> = [
   },
   {
     name: "docker-run",
-    patterns: [
-      "^\\s*(docker)\\s+(run)\\s+(\\S+\\s+)*$",
-    ],
+    patterns: ["^\\s*(docker)\\s+(run)\\s+(\\S+\\s+)*$"],
     sourceCommand: `
       (
         "$ZENO_SCRIPT_DIR/docker-images.zsh";
@@ -548,9 +549,7 @@ const dockerCompletions: ReadonlyArray<UserCompletionSource> = [
   },
   {
     name: "docker",
-    patterns: [
-      "^\\s*(docker)\\s+$",
-    ],
+    patterns: ["^\\s*(docker)\\s+$"],
     sourceCommand: `
       (
         "$ZENO_SCRIPT_DIR/options.zsh" "docker/subcommands" "󰘳" "command" "yellow";
@@ -566,18 +565,14 @@ const dockerCompletions: ReadonlyArray<UserCompletionSource> = [
 const gitCompletions: ReadonlyArray<UserCompletionSource> = [
   {
     name: "git-branch",
-    patterns: [
-      "^\\s*(git)(\\s+-\\S+)*\\s+(branch)(\\s+\\S+)*\\s+$",
-    ],
+    patterns: ["^\\s*(git)(\\s+-\\S+)*\\s+(branch)(\\s+\\S+)*\\s+$"],
     sourceCommand: "$ZENO_SCRIPT_DIR/git-local-branches.zsh",
     options: fzfOptionsFormat,
     callback: "awk '{ print $3 }'",
   },
   {
     name: "git-cherry-pick",
-    patterns: [
-      "^\\s*(git)(\\s+-\\S+)*\\s+(cherry-pick)(\\s+\\S+)*\\s+$",
-    ],
+    patterns: ["^\\s*(git)(\\s+-\\S+)*\\s+(cherry-pick)(\\s+\\S+)*\\s+$"],
     sourceCommand: `
       (
         "$ZENO_SCRIPT_DIR/git-commits.zsh" --all;
@@ -592,9 +587,7 @@ const gitCompletions: ReadonlyArray<UserCompletionSource> = [
   },
   {
     name: "git-diff",
-    patterns: [
-      "^\\s*(git)(\\s+-\\S+)*\\s+(df|diff)(\\s+\\S+)*\\s+$",
-    ],
+    patterns: ["^\\s*(git)(\\s+-\\S+)*\\s+(df|diff)(\\s+\\S+)*\\s+$"],
     sourceCommand: `
       (
         "$ZENO_SCRIPT_DIR/git-local-branches.zsh";
@@ -609,9 +602,7 @@ const gitCompletions: ReadonlyArray<UserCompletionSource> = [
   },
   {
     name: "git-fetch",
-    patterns: [
-      "^\\s*(git)(\\s+-\\S+)*\\s+(fetch)(\\s+\\S+)*\\s+$",
-    ],
+    patterns: ["^\\s*(git)(\\s+-\\S+)*\\s+(fetch)(\\s+\\S+)*\\s+$"],
     sourceCommand: "git remote",
     options: {
       ...fzfOptionsFormat,
@@ -621,9 +612,7 @@ const gitCompletions: ReadonlyArray<UserCompletionSource> = [
   },
   {
     name: "git-log",
-    patterns: [
-      "^\\s*(git)(\\s+-\\S+)*\\s+(graph|log)(\\s+\\S+)*\\s+$",
-    ],
+    patterns: ["^\\s*(git)(\\s+-\\S+)*\\s+(graph|log)(\\s+\\S+)*\\s+$"],
     sourceCommand: `
       (
         "$ZENO_SCRIPT_DIR/git-local-branches.zsh";
@@ -637,9 +626,7 @@ const gitCompletions: ReadonlyArray<UserCompletionSource> = [
   },
   {
     name: "git-rebase",
-    patterns: [
-      "^\\s*(git)(\\s+-\\S+)*\\s+(rebase)(\\s+\\S+)*\\s+$",
-    ],
+    patterns: ["^\\s*(git)(\\s+-\\S+)*\\s+(rebase)(\\s+\\S+)*\\s+$"],
     sourceCommand: `
       (
         "$ZENO_SCRIPT_DIR/git-local-branches.zsh";
@@ -653,9 +640,7 @@ const gitCompletions: ReadonlyArray<UserCompletionSource> = [
   },
   {
     name: "git-reset",
-    patterns: [
-      "^\\s*(git)(\\s+-\\S+)*\\s+(reset)(\\s+\\S+)*\\s+$",
-    ],
+    patterns: ["^\\s*(git)(\\s+-\\S+)*\\s+(reset)(\\s+\\S+)*\\s+$"],
     sourceCommand: `
       (
         "$ZENO_SCRIPT_DIR/git-local-branches.zsh";
@@ -689,18 +674,14 @@ const gitCompletions: ReadonlyArray<UserCompletionSource> = [
   },
   {
     name: "git-user",
-    patterns: [
-      "^\\s*(git)(\\s+-\\S+)*\\s+(user)\\s+$",
-    ],
+    patterns: ["^\\s*(git)(\\s+-\\S+)*\\s+(user)\\s+$"],
     sourceCommand: "git users | sed -E 's/:\\s*/\\t/'",
     options: fzfOptionsFormat,
     callback: "awk '{ print $1 }'",
   },
   {
     name: "git",
-    patterns: [
-      "^\\s*(git)(\\s+-\\S+)*\\s+$",
-    ],
+    patterns: ["^\\s*(git)(\\s+-\\S+)*\\s+$"],
     sourceCommand: `
       (
         "$ZENO_SCRIPT_DIR/options.zsh" "git/subcommands" "󰘳" "command" "yellow";
@@ -730,9 +711,7 @@ const miscCompletions: ReadonlyArray<UserCompletionSource> = [
   },
   {
     name: "file or directory",
-    patterns: [
-      "^\\s*(code|cp|ln|mmv|mv|rm|subl|trash)(\\s+\\S+)*\\s+$",
-    ],
+    patterns: ["^\\s*(code|cp|ln|mmv|mv|rm|subl|trash)(\\s+\\S+)*\\s+$"],
     sourceCommand: "fd --color=always --hidden",
     options: {
       ...fzfOptionsMulti,
@@ -742,9 +721,7 @@ const miscCompletions: ReadonlyArray<UserCompletionSource> = [
   },
   {
     name: "directory",
-    patterns: [
-      "^\\s*(cd|la|ll|ls|tree)(\\s+\\S+)*\\s+$",
-    ],
+    patterns: ["^\\s*(cd|la|ll|ls|tree)(\\s+\\S+)*\\s+$"],
     sourceCommand: "fd --color=always --hidden --type=d",
     options: {
       ...fzfOptionsMulti,
@@ -755,9 +732,7 @@ const miscCompletions: ReadonlyArray<UserCompletionSource> = [
   // curl
   {
     name: "curl",
-    patterns: [
-      "^\\s*(curl)(\\s+\\S+)*\\s+$",
-    ],
+    patterns: ["^\\s*(curl)(\\s+\\S+)*\\s+$"],
     sourceCommand: 'cat "$ZENO_CONFIG_HOME/snippets/curl/snippet.txt"',
     options: {
       ...fzfOptionsMulti,
@@ -767,9 +742,7 @@ const miscCompletions: ReadonlyArray<UserCompletionSource> = [
   // tmux
   {
     name: "tmux",
-    patterns: [
-      "^\\s*(tmux)\\s+$",
-    ],
+    patterns: ["^\\s*(tmux)\\s+$"],
     sourceCommand: `
       (
         "$ZENO_SCRIPT_DIR/options.zsh" "tmux/subcommands" "󰘳" "command" "yellow";
@@ -782,15 +755,6 @@ const miscCompletions: ReadonlyArray<UserCompletionSource> = [
 ];
 
 export default defineConfig(() => ({
-  snippets: [
-    ...cdSnippets,
-    ...gitSnippets,
-    ...dockerSnippets,
-    ...miscSnippets,
-  ],
-  completions: [
-    ...dockerCompletions,
-    ...gitCompletions,
-    ...miscCompletions,
-  ],
+  snippets: [...cdSnippets, ...gitSnippets, ...dockerSnippets, ...miscSnippets],
+  completions: [...dockerCompletions, ...gitCompletions, ...miscCompletions],
 }));
