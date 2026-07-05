@@ -3,6 +3,7 @@
     enable = true;
     onActivation = {
       autoUpdate = true;
+      cleanup = "uninstall";
     };
     brews = [
       # Pinentry for GPG on Mac
@@ -17,6 +18,8 @@
       "battery"
       # Desktop password and login vault
       "bitwarden"
+      # Terminal-based AI coding assistant
+      "claude-code"
       # Write, edit, and chat about your code with AI
       "cursor"
       # Command-line agent for Cursor
