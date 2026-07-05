@@ -6,6 +6,10 @@ typeset -gU PATH path
 typeset -gU FPATH fpath
 
 path=(
+  "$HOME/.nix-profile/bin"(N-/) # home-manager (standalone)
+  "/etc/profiles/per-user/$USER/bin"(N-/) # home-manager (nix-darwin module)
+  "/run/current-system/sw/bin"(N-/) # nix-darwin
+  "/nix/var/nix/profiles/default/bin"(N-/) # nix default profile
   "/opt/homebrew/bin"(N-/) # for Apple Silicon
   "/opt/homebrew/sbin"(N-/) # for Apple Silicon
   "/usr/bin"(N-/)
