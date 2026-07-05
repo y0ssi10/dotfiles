@@ -80,6 +80,10 @@ in
       }
       (
         { config, lib, ... }:
+        let
+          dotfilesDir = "${homeDirectory}/workspace/github.com/y0ssi10/dotfiles";
+          outOfStore = path: config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/${path}";
+        in
         {
           xdg = {
             enable = true;
@@ -88,32 +92,27 @@ in
             dataHome = "${homeDirectory}/.local/share";
             stateHome = "${homeDirectory}/.local/state";
             configFile = {
-              "alacritty/alacritty.toml".source = ./../../.config/alacritty/alacritty.toml;
+              "alacritty/alacritty.toml".source = outOfStore ".config/alacritty/alacritty.toml";
               "bat/config".source = ./../../.config/bat/config;
               "direnv/direnv.toml".source = ./../../.config/direnv/direnv.toml;
               "gh/config.yml".source = ./../../.config/gh/config.yml;
               "git/config".source = ./../../.config/git/config;
               "git/ignore".source = ./../../.config/git/ignore;
-              "lazygit/config.yml".source = ./../../.config/lazygit/config.yml;
-              "mise/config.toml".source =
-                config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/workspace/github.com/y0ssi10/dotfiles/.config/mise/config.toml";
-              "navi/config.yaml".source = ./../../.config/navi/config.yaml;
-              "navi/snippets".source = ./../../.config/navi/snippets;
-              "navi/snippets".recursive = true;
+              "lazygit/config.yml".source = outOfStore ".config/lazygit/config.yml";
+              "mise/config.toml".source = outOfStore ".config/mise/config.toml";
+              "navi/config.yaml".source = outOfStore ".config/navi/config.yaml";
+              "navi/snippets".source = outOfStore ".config/navi/snippets";
               "npm/npmrc".source = ./../../.config/npm/npmrc;
               "python/startup.py".source = ./../../.config/python/startup.py;
-              "scripts".source = ./../../.config/scripts;
-              "scripts".recursive = true;
-              "starship.toml".source = ./../../.config/starship/starship.toml;
-              "tmux".source = ./../../.config/tmux;
-              "tmux".recursive = true;
-              "zeno".source = ./../../.config/zeno;
-              "zeno".recursive = true;
-              "zsh/.zshrc".source = ./../../.config/zsh/.zshrc;
-              "zsh/.zshenv".source = ./../../.config/zsh/.zshenv;
-              "zsh/.zprofile".source = ./../../.config/zsh/.zprofile;
-              "zsh/lazy.zsh".source = ./../../.config/zsh/lazy.zsh;
-              "zsh/plugins.toml".source = ./../../.config/zsh/plugins.toml;
+              "scripts".source = outOfStore ".config/scripts";
+              "starship.toml".source = outOfStore ".config/starship/starship.toml";
+              "tmux".source = outOfStore ".config/tmux";
+              "zeno".source = outOfStore ".config/zeno";
+              "zsh/.zshrc".source = outOfStore ".config/zsh/.zshrc";
+              "zsh/.zshenv".source = outOfStore ".config/zsh/.zshenv";
+              "zsh/.zprofile".source = outOfStore ".config/zsh/.zprofile";
+              "zsh/lazy.zsh".source = outOfStore ".config/zsh/lazy.zsh";
+              "zsh/plugins.toml".source = outOfStore ".config/zsh/plugins.toml";
             };
             dataFile = {
               "gnupg/gpg-agent.conf".source = ./../../.config/gnupg/gpg-agent.conf;
