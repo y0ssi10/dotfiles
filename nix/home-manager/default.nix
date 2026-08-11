@@ -118,6 +118,7 @@ in
               "gnupg/gpg-agent.conf".source = ./../../.config/gnupg/gpg-agent.conf;
             };
           };
+          home.file.".agents/skills".source = outOfStore ".config/agents/skills";
           home.activation.gnupgPermissions = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
             mkdir -p "${homeDirectory}/.local/share/gnupg"
             chmod 700 "${homeDirectory}/.local/share/gnupg"
