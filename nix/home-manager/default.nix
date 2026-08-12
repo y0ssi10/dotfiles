@@ -46,6 +46,7 @@ in
           gnused
           gnupg
           gnugrep
+          herdr
           jq
           k9s
           kubectl
@@ -61,7 +62,6 @@ in
           sheldon
           shellcheck
           starship
-          tmux
           vim
           yq
         ];
@@ -98,6 +98,7 @@ in
               "gh/config.yml".source = ./../../.config/gh/config.yml;
               "git/config".source = ./../../.config/git/config;
               "git/ignore".source = ./../../.config/git/ignore;
+              "herdr/config.toml".source = outOfStore ".config/herdr/config.toml";
               "lazygit/config.yml".source = outOfStore ".config/lazygit/config.yml";
               "mise/config.toml".source = outOfStore ".config/mise/config.toml";
               "navi/config.yaml".source = outOfStore ".config/navi/config.yaml";
@@ -106,7 +107,6 @@ in
               "python/startup.py".source = ./../../.config/python/startup.py;
               "scripts".source = outOfStore ".config/scripts";
               "starship.toml".source = outOfStore ".config/starship/starship.toml";
-              "tmux".source = outOfStore ".config/tmux";
               "zeno".source = outOfStore ".config/zeno";
               "zsh/.zshrc".source = outOfStore ".config/zsh/.zshrc";
               "zsh/.zshenv".source = outOfStore ".config/zsh/.zshenv";

@@ -1,0 +1,38 @@
+#!/usr/bin/env zsh
+# Focus (creating if needed) a herdr workspace for a repo, starting the
+# herdr server first if it isn't already running, then attach to it.
+#
+# Usage: herdr-open-workspace <label> <cwd>
+if [[ "$#" -ne 2 ]]; then
+    echo "usage: $0 <label> <cwd>" >&2
+    return 1
+fi
+
+local label="$1"
+local repo_dir="$2"
+
+if ! herdr status server 2>/dev/null | grep -q "status: *running"; then
+    nohup herdr server >/dev/null 2>&1 &
+    disown
+
+    local waited=0
+    until herdr status server 2>/dev/null | grep -q "status: *running"; do
+        sleep 0.1
+        (( waited += 1 ))
+        if (( waited > 50 )); then
+            echo "herdr server did not start in time" >&2
+            return 1
+        fi
+    done
+fi
+
+local workspace_id
+workspace_id="$(herdr workspace list 2>/dev/null | jq -r --arg label "$label" '.result.workspaces[] | select(.label == $label) | .workspace_id' | head -n1)"
+
+if [[ -n "$workspace_id" ]]; then
+    herdr workspace focus "$workspace_id" >/dev/null 2>&1
+else
+    herdr workspace create --cwd "$repo_dir" --label "$label" --focus >/dev/null 2>&1
+fi
+
+herdr

@@ -1,0 +1,40 @@
+# herdr configuration
+# Migrated from tmux.conf. Most tmux customizations (vi-style pane
+# navigation h/j/k/l, next/previous tab, split via prefix+symbol) already
+# match herdr's built-in defaults, so this file only overrides what differs.
+#
+# Not migrated: tmux's copy-mode URL/IP regex search (`/`, C-u, C-i) has no
+# documented herdr equivalent.
+
+[theme]
+# Follow the host terminal's ANSI palette, mirroring the raw colourN
+# references the old tmux status bar used.
+name = "terminal"
+
+[ui]
+# Explicit for parity with tmux's `mouse on` (this is herdr's default).
+mouse_capture = true
+
+# Show branch and Git status per workspace, replacing the custom
+# pane-border-format.bash script that shelled out to git for this.
+[ui.sidebar.spaces]
+rows = [["state_icon", "workspace"], ["branch", "git_status"]]
+
+[keys]
+# Preserve tmux's "|"/"\" side-by-side split and "C-w" close-window muscle
+# memory alongside herdr's defaults ("prefix+v" and "prefix+shift+x").
+split_vertical = ["prefix+v", "prefix+|", "prefix+\\"]
+close_tab = ["prefix+shift+x", "prefix+ctrl+w"]
+
+# Open lazygit in a temporary zoomed pane, replacing the old
+# `bind g popup -w90% -h90% -E lazygit`. Uses `type = "pane"` (closes when
+# lazygit exits) instead of `type = "popup"` because nixpkgs' current herdr
+# build (0.7.1, this flake's pin) doesn't recognize "popup" yet and a single
+# invalid key falls the *whole* config back to defaults. Switch to
+# `type = "popup"` (with width/height) once nixpkgs catches up.
+# "prefix+g" is reserved for herdr's built-in session navigator, so this
+# uses the alt-modified slot the herdr docs suggest for this exact purpose.
+[[keys.command]]
+key = "prefix+alt+g"
+type = "pane"
+command = "lazygit"

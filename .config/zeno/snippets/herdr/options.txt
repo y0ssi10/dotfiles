@@ -1,0 +1,9 @@
+--no-session	run monolithically (no server/client, escape hatch)
+--session	use or create a named persistent session
+--remote	attach through SSH to a remote Herdr server
+--remote-keybindings	keybindings for --remote app attach (local|server)
+--handoff	opt into live handoff for update or remote attach
+--default-config	print default configuration and exit
+--skill	print the agent skill file and exit
+--version	print version and exit
+--help	show this help

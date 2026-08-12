@@ -167,16 +167,16 @@ widget::ghq::source() {
     readonly local reset="\e[m"
     readonly checked="󰄲"
     readonly unchecked="󰄱"
-    local sessions=($(tmux list-sessions -F "#S" 2>/dev/null))
-    local session
+    local workspaces=($(herdr workspace list 2>/dev/null | jq -r '.result.workspaces[].label' 2>/dev/null))
+    local workspace_label
     local color
     local icon
 
     ghq list | sort | while read -r repo; do
-        session="${repo//[:. ]/-}"
+        workspace_label="${repo//[:. ]/-}"
         color="$blue"
         icon="$unchecked"
-        if (( ${+sessions[(r)$session]} )); then
+        if (( ${+workspaces[(r)$workspace_label]} )); then
             color="$green"
             icon="$checked"
         fi
@@ -208,17 +208,19 @@ widget::ghq::session() {
     fi
 
     local repo_dir="$(ghq list --exact --full-path "$selected")"
-    local session_name="${selected//[:. ]/-}"
+    local workspace_label="${selected//[:. ]/-}"
 
-    if [[ -z "$TMUX" ]]; then
-        BUFFER="tmux new-session -A -s ${(q)session_name} -c ${(q)repo_dir}"
+    if [[ -z "$HERDR_WORKSPACE_ID" ]]; then
+        BUFFER="herdr-open-workspace ${(q)workspace_label} ${(q)repo_dir}"
         zle accept-line
-    elif [[ "$(tmux display-message -p "#S")" != "$session_name" ]]; then
-        tmux new-session -d -s "$session_name" -c "$repo_dir" 2>/dev/null
-        tmux switch-client -t "$session_name"
     else
-        BUFFER="cd ${(q)repo_dir}"
-        zle accept-line
+        local workspace_id
+        workspace_id="$(herdr workspace list 2>/dev/null | jq -r --arg label "$workspace_label" '.result.workspaces[] | select(.label == $label) | .workspace_id' | head -n1)"
+        if [[ -n "$workspace_id" ]]; then
+            herdr workspace focus "$workspace_id" >/dev/null 2>&1
+        else
+            herdr workspace create --cwd "$repo_dir" --label "$workspace_label" --focus >/dev/null 2>&1
+        fi
     fi
     zle -R -c # refresh screen
 }

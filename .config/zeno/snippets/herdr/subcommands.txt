@@ -1,0 +1,15 @@
+agent	control and inspect agent panes
+api	inspect socket API metadata and live runtime state
+channel	manage stable and preview update channels
+completion	generate shell completions
+config	manage local configuration
+integration	manage built-in agent integrations
+notification	show herdr notifications
+pane	control terminal panes
+server	run or control the headless server
+session	manage named persistent sessions
+status	show local client and running server status
+tab	manage tabs over the socket API
+update	download and install the latest version
+workspace	manage workspaces over the socket API
+worktree	manage git worktree checkouts over the socket API
