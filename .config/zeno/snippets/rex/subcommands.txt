@@ -1,0 +1,13 @@
+new	create a session
+ls	list sessions
+run	run a command in a new tab
+split	split a pane
+do	perform an action or run Lua
+session	manage sessions
+window	manage tabs
+block	manage terminal blocks
+client	inspect connected clients
+config	check or reload configuration
+server	manage the Rex server
+completion	generate shell completions
+version	print version information

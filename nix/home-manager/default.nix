@@ -105,6 +105,8 @@ in
               "navi/snippets".source = outOfStore ".config/navi/snippets";
               "npm/npmrc".source = ./../../.config/npm/npmrc;
               "python/startup.py".source = ./../../.config/python/startup.py;
+              "rex/init.lua".source = outOfStore ".config/rex/init.lua";
+              "rex/plugins".source = outOfStore ".config/rex/plugins";
               "scripts".source = outOfStore ".config/scripts";
               "starship.toml".source = outOfStore ".config/starship/starship.toml";
               "zeno".source = outOfStore ".config/zeno";

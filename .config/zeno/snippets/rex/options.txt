@@ -1,0 +1,5 @@
+--server	connect to a Rex server
+--client	act on a connected client
+--autostart	start a missing local server
+--timeout	limit connections and API requests
+--help	show command help

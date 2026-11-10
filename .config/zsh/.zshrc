@@ -24,6 +24,7 @@ path=(
   "$XDG_CONFIG_HOME/scripts/bin"(N-/)
   "$MISE_DATA_DIR/shims"(N-/)
   "$XDG_DATA_HOME/npm/bin"(N-/)
+  "$REX_BIN_DIR"(N-/) # Rex server's matching CLI
   "$path[@]"
 )
 

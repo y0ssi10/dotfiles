@@ -739,14 +739,14 @@ const miscCompletions: ReadonlyArray<UserCompletionSource> = [
     },
     callback: "sed 's/ /\\n/'",
   },
-  // herdr
+  // Rex
   {
-    name: "herdr",
-    patterns: ["^\\s*(herdr)\\s+$"],
+    name: "rex",
+    patterns: ["^\\s*(rex)\\s+$"],
     sourceCommand: `
       (
-        "$ZENO_SCRIPT_DIR/options.zsh" "herdr/subcommands" "󰘳" "command" "yellow";
-        "$ZENO_SCRIPT_DIR/options.zsh" "herdr/options" "󰈻" "option" "blue";
+        "$ZENO_SCRIPT_DIR/options.zsh" "rex/subcommands" "󰘳" "command" "yellow";
+        "$ZENO_SCRIPT_DIR/options.zsh" "rex/options" "󰈻" "option" "blue";
       )
     `.replaceAll("\n", " "),
     options: fzfOptionsFormat,
