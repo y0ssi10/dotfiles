@@ -27,8 +27,6 @@
       # Dia browser
       "thebrowsercompany-dia"
       "font-udev-gothic-nf"
-      # Terminal emulator that uses platform-native UI and GPU acceleration
-      "ghostty"
       # Web browser
       "google-chrome"
       # Japanese input software
