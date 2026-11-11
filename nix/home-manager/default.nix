@@ -108,7 +108,7 @@ in
               "rex/init.lua".source = outOfStore ".config/rex/init.lua";
               "rex/plugins".source = outOfStore ".config/rex/plugins";
               "scripts".source = outOfStore ".config/scripts";
-              "starship.toml".source = outOfStore ".config/starship/starship.toml";
+              "starship/starship.toml".source = outOfStore ".config/starship/starship.toml";
               "zeno".source = outOfStore ".config/zeno";
               "zsh/.zshrc".source = outOfStore ".config/zsh/.zshrc";
               "zsh/.zshenv".source = outOfStore ".config/zsh/.zshenv";
