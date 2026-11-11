@@ -3,7 +3,7 @@ local directory = debug.getinfo(1, "S").source:gsub("^@", ""):match("^(.*)/init%
 rex.action{
   name = "ghq_open",
   title = "Open ghq Repository",
-  args = { block = "string?", dir = "string?" },
+  args = { block = "string?", dir = "string?", label = "string?" },
   run = function(ctx, args)
     if args.dir == nil then
       assert(ctx.session_id and ctx.block_id and ctx.client_id,
@@ -30,8 +30,8 @@ rex.action{
     assert(rex.session.focus_block{ block_id = args.block })
     if args.dir == "" then return end
 
-    local label = args.dir:gsub("/+$", ""):match("([^/]+)$")
-    assert(label, "Expected a repository name")
+    local label = args.label
+    assert(type(label) == "string" and label ~= "", "Expected a repository label")
     local listed = assert(rex.call("session.list"))
     local session_id
     for _, session in ipairs(listed.sessions) do

@@ -21,25 +21,28 @@ labels="$(jq -er '[.sessions[].label] | join("\n")' <<< "$sessions")" \
 local -a session_labels=("${(@f)labels}")
 
 ghq_picker_source() {
-    local dir
+    local dir display
     for dir in "${(@f)repos}"; do
-        if (( ${session_labels[(Ie)${dir:t}]} )); then
-            printf '\e[32m󰄲 %s\e[m\n' "$dir"
+        display="${dir:h:t}/${dir:t}"
+        if (( ${session_labels[(Ie)$display]} )); then
+            printf '%s\t%s\t\e[32m󰄲 %s\e[m\n' "$dir" "$display" "$display"
         else
-            printf '\e[34m󰄱 %s\e[m\n' "$dir"
+            printf '%s\t%s\t\e[34m󰄱 %s\e[m\n' "$dir" "$display" "$display"
         fi
     done
 }
 
 local selected code
+local -a fields
 selected="$(ghq_picker_source | fzf --ansi --exit-0 --reverse \
-    --preview='fzf-preview-git {2..}' --preview-window='right:60%')"
+    --delimiter=$'\t' --with-nth=3.. \
+    --preview='fzf-preview-git {1}' --preview-window='right:60%')"
 code=$?
 if (( code == 1 || code == 130 )); then
     selected=""
 else
     (( code == 0 )) || ghq_picker_fail "fzf failed with exit status $code"
 fi
-selected="${selected#* }"
-rex -C "$client_id" do ghq_open "block=$block_id" "dir=$selected" \
+fields=("${(@ps:\t:)selected}")
+rex -C "$client_id" do ghq_open "block=$block_id" "dir=${fields[1]}" "label=${fields[2]}" \
     || ghq_picker_fail "Could not open the selected repository"
