@@ -107,6 +107,7 @@ in
               "python/startup.py".source = ./../../.config/python/startup.py;
               "rex/init.lua".source = outOfStore ".config/rex/init.lua";
               "rex/plugins".source = outOfStore ".config/rex/plugins";
+              "ripgrep/config".source = outOfStore ".config/ripgrep/config";
               "scripts".source = outOfStore ".config/scripts";
               "starship/starship.toml".source = outOfStore ".config/starship/starship.toml";
               "zeno".source = outOfStore ".config/zeno";
