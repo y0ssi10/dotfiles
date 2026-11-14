@@ -22,17 +22,15 @@ DIALOG="
   This script includes:
   (1) download dotfiles
   (2) link dotfiles
-  (3) setup applications
 
   This script also includes for Nix:
   (1') install Xcode, Homebrew and Nix
   (2') bootstrap Nix
 
   Select:
-  [a] run (1) (2) (3) above steps
+  [a] run (1) (2) above steps
   [d] only download dotfiles
   [l] only link dotfiles
-  [s] only setup applications
   [i] only install Xcode, Homebrew and Nix
   [b] only bootstrap Nix
   [m] only install mise tools
@@ -54,11 +52,6 @@ die_if_error() {
     die "Error occurred during $1"
   fi
 }
-
-OS="unknown"
-if [ "$(uname)" = "Darwin" ]; then
-  OS="mac"
-fi
 
 install_xcode() {
   echo "Try to install Xcode Command Line Tools..."
@@ -203,6 +196,10 @@ else
   read -r selection
 fi
 
+if [[ "$selection" = *"s"* ]]; then
+  die "The 's' option has been removed. Use 'i' for prerequisites and 'b' for Nix-managed applications."
+fi
+
 if [[ "$selection" = *"a"* ]] || [[ "$selection" = *"d"* ]]; then
   echo "  begin download dotfiles."
   download_dotfiles
@@ -214,15 +211,6 @@ if [[ "$selection" = *"a"* ]] || [[ "$selection" = *"l"* ]]; then
   echo "  begin link dotfiles."
   link_dotfiles
   echo "  end link dotfiles."
-  echo ""
-fi
-
-if [[ "$selection" = *"a"* ]] || [[ "$selection" = *"s"* ]]; then
-  echo "  begin setup applications."
-
-  os_install_sh="${DOT_DIR}/etc/${OS}/install.sh"
-  [ -f "$os_install_sh" ] && sh -c "$os_install_sh"
-  echo "  end setup applications."
   echo ""
 fi
 
