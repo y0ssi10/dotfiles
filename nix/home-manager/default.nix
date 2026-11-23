@@ -62,6 +62,7 @@ in
           sheldon
           shellcheck
           starship
+          tree-sitter
           vim
           yq
         ];
@@ -104,6 +105,7 @@ in
               "navi/config.yaml".source = outOfStore ".config/navi/config.yaml";
               "navi/snippets".source = outOfStore ".config/navi/snippets";
               "npm/npmrc".source = ./../../.config/npm/npmrc;
+              "nvim".source = outOfStore ".config/nvim";
               "python/startup.py".source = ./../../.config/python/startup.py;
               "rex/init.lua".source = outOfStore ".config/rex/init.lua";
               "rex/plugins".source = outOfStore ".config/rex/plugins";
