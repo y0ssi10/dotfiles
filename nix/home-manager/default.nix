@@ -95,7 +95,7 @@ in
               "alacritty/alacritty.toml".source = outOfStore ".config/alacritty/alacritty.toml";
               "bat/config".source = ./../../.config/bat/config;
               "direnv/direnv.toml".source = ./../../.config/direnv/direnv.toml;
-              "gh/config.yml".source = ./../../.config/gh/config.yml;
+              "gh/config.yml".source = outOfStore ".config/gh/config.yml";
               "git/config".source = ./../../.config/git/config;
               "git/ignore".source = ./../../.config/git/ignore;
               "herdr/config.toml".source = outOfStore ".config/herdr/config.toml";
